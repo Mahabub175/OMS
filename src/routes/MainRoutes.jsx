@@ -3,8 +3,13 @@ import MainLayout from "../layout/MainLayout";
 import HomeDashboard from "../pages/Dashboard/HomeDashboard/HomeDashboard";
 import Login from "../pages/Login/Login";
 import PrivateRoute from "./PrivateRoute";
+import HomePage from "../pages/Home/HomePage/HomePage";
 
 export const router = createBrowserRouter([
+  {
+    path: "/",
+    element: <HomePage />,
+  },
   {
     path: "/dashboard",
     element: (
