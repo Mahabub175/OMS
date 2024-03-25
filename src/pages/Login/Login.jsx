@@ -1,21 +1,28 @@
 import { Button } from "antd";
 import { useForm } from "react-hook-form";
-import { useLoginMutation } from "../../redux/services/auth/authApi";
 import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { useLoginMutation } from "../../redux/services/auth/authApi";
 import { setUser } from "../../redux/services/auth/authSlice";
 import { verifyToken } from "../../utilities/lib/verifyToken";
 
 const Login = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const { register, handleSubmit } = useForm();
 
-  const [login] = useLoginMutation();
+  const [login, { isSuccess }] = useLoginMutation();
 
   const onSubmit = async (data) => {
     const res = await login(data).unwrap();
     const user = verifyToken(res.access);
     dispatch(setUser({ user: user, token: res.access }));
   };
+
+  if (isSuccess) {
+    navigate("/");
+  }
+
   return (
     <div className="h-screen flex justify-center items-center">
       <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-4">
