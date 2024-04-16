@@ -1,5 +1,5 @@
 {
-  "name": "react-starter-pack",
+  "name": "falaq-oil",
   "private": true,
   "version": "0.0.0",
   "type": "module",
@@ -10,6 +10,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@hookform/resolvers": "^3.3.4",
     "@reduxjs/toolkit": "^2.2.2",
     "antd": "^5.15.3",
     "jwt-decode": "^4.0.0",
@@ -18,11 +19,13 @@
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-hook-form": "^7.51.1",
-    "react-icons": "^5.0.1",
+    "react-icons": "^5.1.0",
     "react-redux": "^9.1.0",
     "react-router-dom": "^6.22.3",
     "redux-persist": "^6.0.0",
-    "sort-by": "^1.2.0"
+    "sonner": "^1.4.41",
+    "sort-by": "^1.2.0",
+    "zod": "^3.22.4"
   },
   "devDependencies": {
     "@types/react": "^18.2.66",
