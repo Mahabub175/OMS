@@ -1,8 +1,8 @@
-# React-Starter-Kit
+# Falaq Oil Management System
 
 ## Description
 
-This repo contains the code for the react-starter-kit for vitasoft-solution.
+This repo contains the code for the Project Falaq Oil Management System.
 
 ## Installation
 

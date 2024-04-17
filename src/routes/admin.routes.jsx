@@ -5,33 +5,22 @@ import Purchase from "../pages/Dashboard/Purchase/Purchase";
 import Sale from "../pages/Dashboard/Sale/Sale";
 import Expense from "../pages/Dashboard/Expense/Expense";
 import Quotation from "../pages/Dashboard/Quotations/Quotation";
-import Transfer from "../pages/Dashboard/Transfer/Transfer";
-import Return from "../pages/Dashboard/Return/Return";
-import Accounting from "../pages/Dashboard/Accounting/Accounting";
 import People from "../pages/Dashboard/People/People";
-import Reports from "../pages/Dashboard/Reports/Reports";
-import AddOns from "../pages/Dashboard/AddOns/AddOns";
-import Settings from "../pages/Dashboard/Settings/Settings";
-import Documents from "../pages/Dashboard/Documents/Documents";
 import Hrm from "../pages/Dashboard/Hrm/Hrm";
 
 //icons
 import { TbDashboard } from "react-icons/tb";
 import { AiOutlineDashboard } from "react-icons/ai";
-import { BsBoxSeam } from "react-icons/bs";
 import {
-  MdProductionQuantityLimits,
-  MdAccountBalance,
-  MdPeopleAlt,
-} from "react-icons/md";
-import { GoCreditCard } from "react-icons/go";
+  FaHandHoldingMedical,
+  FaRegClipboard,
+  FaHandHoldingUsd,
+} from "react-icons/fa";
+import { GiReceiveMoney } from "react-icons/gi";
+import { MdPeopleAlt } from "react-icons/md";
 import { FaCartShopping, FaMoneyBillWave } from "react-icons/fa6";
 import { LuClipboardList } from "react-icons/lu";
-import { RiArrowGoBackFill, RiArrowGoForwardFill } from "react-icons/ri";
-import { IoPeopleCircle, IoDocumentTextOutline } from "react-icons/io5";
-import { TbReport } from "react-icons/tb";
-import { VscDiffAdded } from "react-icons/vsc";
-import { MdOutlineSettings } from "react-icons/md";
+import { IoPeopleCircle } from "react-icons/io5";
 
 export const adminPaths = [
   {
@@ -42,24 +31,36 @@ export const adminPaths = [
   },
   {
     name: "Short Hand",
-    icon: BsBoxSeam,
+    icon: FaHandHoldingMedical,
     children: [
       {
-        name: "Products",
-        path: "products",
-        icon: MdProductionQuantityLimits,
+        name: "Incomes",
+        path: "incomes",
+        icon: GiReceiveMoney,
+        element: <Product />,
+      },
+      {
+        name: "Expenses",
+        path: "expenses",
+        icon: FaMoneyBillWave,
+        element: <Product />,
+      },
+      {
+        name: "Ledger",
+        path: "ledger",
+        icon: FaRegClipboard,
         element: <Product />,
       },
     ],
   },
   {
     name: "Commission",
-    icon: GoCreditCard,
+    icon: FaHandHoldingUsd,
     children: [
       {
         name: "Commission",
         path: "purchases",
-        icon: TbDashboard,
+        icon: FaHandHoldingUsd,
         element: <Purchase />,
       },
     ],
