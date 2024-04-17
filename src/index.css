@@ -19,3 +19,7 @@
   background-color: #ff8100 !important;
   color: #fff !important;
 }
+.ant-menu-submenu-selected > .ant-menu-submenu-title {
+  color: #ff8100 !important;
+  font-weight: 700 !important;
+}
