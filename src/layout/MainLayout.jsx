@@ -18,6 +18,7 @@ const MainLayout = () => {
           style={{
             padding: 24,
             minHeight: 280,
+            backgroundColor: "white",
           }}
         >
           <Outlet />

@@ -32,14 +32,9 @@ const SideBar = ({ collapsed, setCollapsed }) => {
         collapsible
         collapsed={collapsed}
       >
-        <Menu
-          theme="light"
-          mode="inline"
-          className="mt-5"
-          defaultSelectedKeys={["4"]}
-          items={sidebarItems}
-        />
+        <Menu mode="inline" className="mt-5" items={sidebarItems} />
       </Sider>
+
       <Button
         className="absolute top-0 -right-5 mt-2 mr-2 bg-white border border-gray-200 rounded-full"
         type="text"
