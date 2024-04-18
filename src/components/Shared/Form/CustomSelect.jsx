@@ -4,15 +4,16 @@ import { Form, Select } from "antd";
 const CustomSelect = ({ label, name, placeholder, mode }) => {
   return (
     <>
-      <label htmlFor={name} className="font-bold text-black/70">
+      {/* <label htmlFor={name} className="font-bold text-black/70">
         {label}:
-      </label>
+      </label> */}
       <Controller
         name={name}
         render={({ field, fieldState: { error } }) => (
           <Form.Item
             validateStatus={error ? "error" : ""}
             help={error ? error.message : null}
+            label={label}
           >
             <Select
               {...field}

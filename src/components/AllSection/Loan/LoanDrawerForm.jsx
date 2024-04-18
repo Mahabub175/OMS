@@ -1,4 +1,5 @@
 import CustomInput from "../../Shared/Form/CustomInput";
+import FileUploader from "../../Shared/Form/FileUploader";
 
 const LoanDrawerForm = () => {
   return (
@@ -40,6 +41,13 @@ const LoanDrawerForm = () => {
         type={"text"}
         required={true}
       />
+      <div>
+        <FileUploader
+          file_name={"nid_image"}
+          label={"NID Image"}
+          required={true}
+        />
+      </div>
     </>
   );
 };
