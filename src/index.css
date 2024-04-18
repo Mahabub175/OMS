@@ -26,3 +26,6 @@
 .ant-drawer-header {
   display: none !important;
 }
+.ant-form-item-label {
+  font-weight: 700 !important;
+}

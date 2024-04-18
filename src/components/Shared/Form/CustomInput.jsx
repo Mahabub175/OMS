@@ -4,15 +4,16 @@ import { Controller } from "react-hook-form";
 const CustomInput = ({ type, name, label, placeholder, required }) => {
   return (
     <>
-      <label htmlFor={name} className="font-bold text-black/70">
+      {/* <label htmlFor={name} className="font-bold text-black/70">
         {label}:
-      </label>
+      </label> */}
       <Controller
         name={name}
         render={({ field, fieldState: { error } }) => (
           <Form.Item
             validateStatus={error ? "error" : ""}
             help={error ? error.message : null}
+            label={label}
           >
             {(type === "password" && (
               <Input.Password

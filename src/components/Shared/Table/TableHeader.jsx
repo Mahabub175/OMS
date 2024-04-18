@@ -1,12 +1,12 @@
 import { FaPlus } from "react-icons/fa";
 import { RiImportFill, RiFileExcel2Line, RiFilePdf2Fill } from "react-icons/ri";
 
-const TableHeader = ({ setOpen }) => {
+const TableHeader = ({ setOpen, title }) => {
   return (
     <>
       <div className="flex items-center justify-between">
         <div className="flex gap-3 items-center">
-          <h2 className="text-3xl lg:text-4xl font-bold">Department</h2>
+          <h2 className="text-3xl lg:text-4xl font-bold">{title}</h2>
           <button
             className="bg-primary rounded-full p-2 mt-1"
             onClick={() => setOpen(true)}

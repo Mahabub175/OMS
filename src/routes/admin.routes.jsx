@@ -1,11 +1,7 @@
 //components
 import AdminDashboard from "../pages/Dashboard/Admin/AdminDashboard";
 import Product from "../pages/Dashboard/Product/Product";
-import Purchase from "../pages/Dashboard/Purchase/Purchase";
-import Sale from "../pages/Dashboard/Sale/Sale";
-import Expense from "../pages/Dashboard/Expense/Expense";
 import Quotation from "../pages/Dashboard/Quotations/Quotation";
-import People from "../pages/Dashboard/People/People";
 import Department from "../pages/Dashboard/Hrm/Department/Department";
 import Employee from "../pages/Dashboard/Hrm/Employee/Employee";
 import Attendance from "../pages/Dashboard/Hrm/Attendance/Attendance";
@@ -20,13 +16,20 @@ import {
   FaRegClipboard,
   FaHandHoldingUsd,
   FaClipboardList,
+  FaUsers,
 } from "react-icons/fa";
 import { GiReceiveMoney, GiTakeMyMoney } from "react-icons/gi";
 import { MdPeopleAlt, MdOutlineApartment } from "react-icons/md";
-import { FaCartShopping, FaMoneyBillWave, FaClipboard } from "react-icons/fa6";
-import { LuClipboardList } from "react-icons/lu";
+import {
+  FaCartShopping,
+  FaMoneyBillWave,
+  FaClipboard,
+  FaMoneyBillTransfer,
+  FaMoneyBillTrendUp,
+} from "react-icons/fa6";
 import { IoPeopleCircle } from "react-icons/io5";
 import { IoIosPeople } from "react-icons/io";
+import Beneficiary from "../pages/Dashboard/Loan/Beneficiary";
 
 export const adminPaths = [
   {
@@ -67,7 +70,7 @@ export const adminPaths = [
         name: "Commission",
         path: "purchases",
         icon: FaHandHoldingUsd,
-        element: <Purchase />,
+        element: <Quotation />,
       },
     ],
   },
@@ -79,7 +82,7 @@ export const adminPaths = [
         name: "Capital",
         path: "sales",
         icon: TbDashboard,
-        element: <Sale />,
+        element: <Quotation />,
       },
     ],
   },
@@ -91,36 +94,36 @@ export const adminPaths = [
         name: "Sales",
         path: "expenses",
         icon: TbDashboard,
-        element: <Expense />,
+        element: <Quotation />,
       },
     ],
   },
   {
     name: "Loan",
-    icon: LuClipboardList,
+    icon: GiTakeMyMoney,
     children: [
       {
-        name: "Loan",
-        path: "quotations",
-        icon: TbDashboard,
-        element: <Quotation />,
+        name: "Beneficiary",
+        path: "loan-beneficiary",
+        icon: FaUsers,
+        element: <Beneficiary />,
       },
       {
-        name: "Beneficiary",
-        path: "quotations",
-        icon: TbDashboard,
+        name: "Loan",
+        path: "loan",
+        icon: GiReceiveMoney,
         element: <Quotation />,
       },
       {
         name: "Loan Installment",
-        path: "quotations",
-        icon: TbDashboard,
+        path: "loan-installment",
+        icon: FaMoneyBillTransfer,
         element: <Quotation />,
       },
       {
         name: "Loan Transaction",
-        path: "quotations",
-        icon: TbDashboard,
+        path: "loan-transaction",
+        icon: FaMoneyBillTrendUp,
         element: <Quotation />,
       },
     ],
@@ -169,7 +172,7 @@ export const adminPaths = [
         name: "Peoples",
         path: "peoples",
         icon: TbDashboard,
-        element: <People />,
+        element: <Quotation />,
       },
     ],
   },

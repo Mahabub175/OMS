@@ -4,6 +4,7 @@ import TableHeader from "../../../../components/Shared/Table/TableHeader";
 import CustomForm from "../../../../components/Shared/Form/CustomForm";
 import CustomInput from "../../../../components/Shared/Form/CustomInput";
 import CustomDrawer from "../../../../components/Shared/Drawer/CustomDrawer";
+import { SubmitButton } from "../../../../components/Shared/Button/CustomButton";
 
 const Department = () => {
   const [open, setOpen] = useState(false);
@@ -13,7 +14,7 @@ const Department = () => {
   };
   return (
     <div className="px-5">
-      <TableHeader setOpen={setOpen} />
+      <TableHeader setOpen={setOpen} title={"Department"} />
 
       <CustomDrawer open={open} setOpen={setOpen} title="Create Department">
         <CustomForm onSubmit={onSubmit}>
@@ -32,14 +33,7 @@ const Department = () => {
             >
               Cancel
             </Button>
-            <Button
-              htmlType="submit"
-              size="large"
-              type="text"
-              className="font-bold w-full bg-primary border border-primary px-20 pt-2 pb-8 text-white"
-            >
-              Save
-            </Button>
+            <SubmitButton text={"Save"} />
           </div>
         </CustomForm>
       </CustomDrawer>
