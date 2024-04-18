@@ -1,4 +1,4 @@
-import { Avatar, Button, Popover } from "antd";
+import { Avatar, Popover } from "antd";
 import { useDispatch } from "react-redux";
 import { logout } from "../../../redux/services/auth/authSlice";
 import { toast } from "sonner";
@@ -11,9 +11,14 @@ const Profile = () => {
     toast.success("Logged out successfully!", { duration: 2000 });
   };
   const content = (
-    <div className="">
-      <Button onClick={handleLogout}>Log Out</Button>
-    </div>
+    <>
+      <button
+        onClick={handleLogout}
+        className="bg-primary text-white font-bold hover:bg-transparent border border-primary hover:text-primary duration-300 px-6 py-1.5 rounded-lg"
+      >
+        Log Out
+      </button>
+    </>
   );
 
   return (

@@ -5,24 +5,9 @@ import { TbArrowBadgeRight } from "react-icons/tb";
 
 const { Sider } = Layout;
 
-const userRole = {
-  ADMIN: "admin",
-  MANAGER: "manager",
-};
-
 const SideBar = ({ collapsed, setCollapsed }) => {
-  const role = "admin";
+  const sidebarItems = sidebarItemsGenerator(adminPaths);
 
-  let sidebarItems;
-
-  switch (role) {
-    case userRole.ADMIN:
-      sidebarItems = sidebarItemsGenerator(adminPaths, userRole.ADMIN);
-      break;
-
-    default:
-      break;
-  }
   return (
     <div className="relative">
       <Sider

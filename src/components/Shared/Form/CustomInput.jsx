@@ -1,7 +1,7 @@
 import { Form, Input } from "antd";
 import { Controller } from "react-hook-form";
 
-const CustomInput = ({ type, name, label, placeholder }) => {
+const CustomInput = ({ type, name, label, placeholder, required }) => {
   return (
     <>
       <label htmlFor={name} className="font-bold text-black/70">
@@ -19,7 +19,8 @@ const CustomInput = ({ type, name, label, placeholder }) => {
                 {...field}
                 size="large"
                 placeholder={placeholder}
-                className="mt-2 hover:border-secondary border-2 focus:border-secondary"
+                required={required}
+                className="mt-2 hover:border-primary border-2 focus:border-primary"
               />
             )) ||
               (type === "textarea" && (
@@ -27,16 +28,17 @@ const CustomInput = ({ type, name, label, placeholder }) => {
                   {...field}
                   size="large"
                   placeholder={placeholder}
-                  className="mt-2 hover:border-secondary border-2 focus:border-secondary"
+                  required={required}
+                  className="mt-2 hover:border-primary border-2 focus:border-primary"
                 />
               )) || (
                 <Input
                   {...field}
                   type={type}
                   size="large"
-                  color=""
+                  required={required}
                   placeholder={placeholder}
-                  className="mt-2 hover:border-secondary border-2 focus:border-secondary"
+                  className="mt-2 hover:border-primary border-2 focus:border-primary"
                 />
               )}
           </Form.Item>

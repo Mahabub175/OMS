@@ -7,7 +7,7 @@
 }
 
 ::-webkit-scrollbar-track {
-  background: #f87171;
+  background: #f1f1f1;
 }
 
 ::-webkit-scrollbar-thumb {
@@ -22,4 +22,7 @@
 .ant-menu-submenu-selected > .ant-menu-submenu-title {
   color: #ff8100 !important;
   font-weight: 700 !important;
+}
+.ant-drawer-header {
+  display: none !important;
 }

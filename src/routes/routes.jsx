@@ -13,23 +13,6 @@ export const router = createBrowserRouter([
         <App />
       </PrivateRoute>
     ),
-  },
-  {
-    path: "/admin",
-    element: (
-      <PrivateRoute>
-        <App />
-      </PrivateRoute>
-    ),
-    children: routeGenerator(adminPaths),
-  },
-  {
-    path: "/manager",
-    element: (
-      <PrivateRoute>
-        <App />
-      </PrivateRoute>
-    ),
     children: routeGenerator(adminPaths),
   },
   {

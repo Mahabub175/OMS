@@ -6,7 +6,11 @@ import Sale from "../pages/Dashboard/Sale/Sale";
 import Expense from "../pages/Dashboard/Expense/Expense";
 import Quotation from "../pages/Dashboard/Quotations/Quotation";
 import People from "../pages/Dashboard/People/People";
-import Hrm from "../pages/Dashboard/Hrm/Hrm";
+import Department from "../pages/Dashboard/Hrm/Department/Department";
+import Employee from "../pages/Dashboard/Hrm/Employee/Employee";
+import Attendance from "../pages/Dashboard/Hrm/Attendance/Attendance";
+import Leaves from "../pages/Dashboard/Hrm/Leaves/Leaves";
+import Salary from "../pages/Dashboard/Hrm/Salary/Salary";
 
 //icons
 import { TbDashboard } from "react-icons/tb";
@@ -15,12 +19,14 @@ import {
   FaHandHoldingMedical,
   FaRegClipboard,
   FaHandHoldingUsd,
+  FaClipboardList,
 } from "react-icons/fa";
-import { GiReceiveMoney } from "react-icons/gi";
-import { MdPeopleAlt } from "react-icons/md";
-import { FaCartShopping, FaMoneyBillWave } from "react-icons/fa6";
+import { GiReceiveMoney, GiTakeMyMoney } from "react-icons/gi";
+import { MdPeopleAlt, MdOutlineApartment } from "react-icons/md";
+import { FaCartShopping, FaMoneyBillWave, FaClipboard } from "react-icons/fa6";
 import { LuClipboardList } from "react-icons/lu";
 import { IoPeopleCircle } from "react-icons/io5";
+import { IoIosPeople } from "react-icons/io";
 
 export const adminPaths = [
   {
@@ -124,10 +130,34 @@ export const adminPaths = [
     icon: IoPeopleCircle,
     children: [
       {
-        name: "HRM",
-        path: "hrm",
-        icon: TbDashboard,
-        element: <Hrm />,
+        name: "Department",
+        path: "department",
+        icon: MdOutlineApartment,
+        element: <Department />,
+      },
+      {
+        name: "Employee",
+        path: "employee",
+        icon: IoIosPeople,
+        element: <Employee />,
+      },
+      {
+        name: "Attendance",
+        path: "attendance",
+        icon: FaClipboardList,
+        element: <Attendance />,
+      },
+      {
+        name: "Leaves",
+        path: "leaves",
+        icon: FaClipboard,
+        element: <Leaves />,
+      },
+      {
+        name: "Salary",
+        path: "salary",
+        icon: GiTakeMyMoney,
+        element: <Salary />,
       },
     ],
   },
