@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import { useEffect, useState } from "react";
 import CustomInput from "../../Shared/Form/CustomInput";
 import FileUploader from "../../Shared/Form/FileUploader";
