@@ -23,7 +23,7 @@ const Login = () => {
       const user = verifyToken(res.access);
       dispatch(setUser({ user: user, token: res.access }));
       toast.success("Logged in successfully!", { id: toastId, duration: 2000 });
-      navigate("/admin/dashboard");
+      navigate("/dashboard");
     } catch (error) {
       toast.error("Invalid credentials. Please try again!", {
         id: toastId,

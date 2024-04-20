@@ -20,6 +20,7 @@ export default {
         secondary: "#2563EB",
         pdf: "#F87171",
         excel: "#22C55E",
+        light: "#EFF6FF",
       },
     },
   },
