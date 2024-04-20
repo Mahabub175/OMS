@@ -31,6 +31,7 @@ import { IoPeopleCircle } from "react-icons/io5";
 import { IoIosPeople } from "react-icons/io";
 import Beneficiary from "../pages/Dashboard/Loan/Beneficiary";
 import Installment from "../pages/Dashboard/Loan/Installment";
+import Loan from "../pages/Dashboard/Loan/Loan";
 
 export const adminPaths = [
   {
@@ -113,7 +114,7 @@ export const adminPaths = [
         name: "Loan",
         path: "loan",
         icon: GiReceiveMoney,
-        element: <Quotation />,
+        element: <Loan />,
       },
       {
         name: "Loan Installment",

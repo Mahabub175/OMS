@@ -4,10 +4,10 @@ import TableHeader from "../../../components/Shared/Table/TableHeader";
 import CustomDrawer from "../../../components/Shared/Drawer/CustomDrawer";
 import CustomForm from "../../../components/Shared/Form/CustomForm";
 import { SubmitButton } from "../../../components/Shared/Button/CustomButton";
-import BeneficiaryDrawerForm from "../../../components/AllSection/Loan/BeneficiaryDrawerForm";
 import { Space, Table } from "antd";
 import { MdDelete } from "react-icons/md";
 import { FaEdit, FaEye } from "react-icons/fa";
+import LoanDrawerForm from "../../../components/AllSection/Loan/LoanDrawerForm";
 
 const columns = [
   {
@@ -97,7 +97,7 @@ const data = [
   },
 ];
 
-const Beneficiary = () => {
+const Loan = () => {
   const [open, setOpen] = useState(false);
 
   const onSubmit = (data) => {
@@ -105,7 +105,7 @@ const Beneficiary = () => {
   };
   return (
     <div className="px-5">
-      <TableHeader setOpen={setOpen} title={"Loan Beneficiary"} />
+      <TableHeader setOpen={setOpen} title={"Loan"} />
 
       <Table
         columns={columns}
@@ -114,9 +114,9 @@ const Beneficiary = () => {
         className="mt-10"
       />
 
-      <CustomDrawer open={open} setOpen={setOpen} title="Create Beneficiary">
+      <CustomDrawer open={open} setOpen={setOpen} title="Create Loan">
         <CustomForm onSubmit={onSubmit}>
-          <BeneficiaryDrawerForm />
+          <LoanDrawerForm />
           <div className="flex justify-end items-center gap-4 mt-20">
             <Button
               onClick={() => setOpen(false)}
@@ -133,4 +133,4 @@ const Beneficiary = () => {
   );
 };
 
-export default Beneficiary;
+export default Loan;

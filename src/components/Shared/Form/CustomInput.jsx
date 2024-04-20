@@ -1,4 +1,4 @@
-import { Form, Input } from "antd";
+import { DatePicker, Form, Input } from "antd";
 import { Controller } from "react-hook-form";
 
 const CustomInput = ({ type, name, label, placeholder, required }) => {
@@ -28,6 +28,15 @@ const CustomInput = ({ type, name, label, placeholder, required }) => {
                   placeholder={placeholder}
                   required={required}
                   className="mt-2 hover:border-primary border-2 focus:border-primary"
+                />
+              )) ||
+              (type === "date" && (
+                <DatePicker
+                  {...field}
+                  size="large"
+                  placeholder={placeholder}
+                  required={required}
+                  className="mt-2 w-full hover:border-primary border-2 focus:border-primary"
                 />
               )) || (
                 <Input
