@@ -42,10 +42,10 @@ const Login = () => {
         >
           <CustomInput
             label="Email"
-            type={"email"}
+            type={"text"}
             required={true}
             name={"email"}
-            placeholder={"Email"}
+            placeholder={"Email or Username"}
           />
           <CustomInput
             label="Password"

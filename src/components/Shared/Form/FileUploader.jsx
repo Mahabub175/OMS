@@ -48,7 +48,7 @@ const FileUploader = ({ name, label, placeholder, required }) => {
             label={label}
           >
             <div
-              className="mt-1 flex items-center justify-center px-6 pt-5 pb-6 border-2 border-gray-300 border-dashed rounded-md hover:border-primary cursor-pointer duration-200"
+              className="mt-1 flex items-center justify-center px-6 pt-5 pb-6 border-2 border-gray-300 border-dashed rounded-md hover:border-primary cursor-pointer duration-200 group"
               onDrop={handleDrop}
               onDragOver={(e) => e.preventDefault()}
             >
@@ -84,7 +84,7 @@ const FileUploader = ({ name, label, placeholder, required }) => {
                     className="relative cursor-pointer bg-white rounded-md font-medium text-primary hover:text-primary"
                   >
                     <svg
-                      className="mx-auto h-12 w-12 text-gray-400"
+                      className="mx-auto h-12 w-12 text-gray-400 group-hover:text-primary duration-200"
                       fill="none"
                       stroke="currentColor"
                       viewBox="0 0 24 24"
@@ -112,7 +112,10 @@ const FileUploader = ({ name, label, placeholder, required }) => {
                       placeholder={placeholder}
                     />
                   </label>
-                  <span>Upload a file or drag and drop</span>
+                  <span>
+                    <span className="text-primary font-bold">Click to</span>{" "}
+                    Upload a file or drag and drop
+                  </span>
                 </div>
                 <p className="text-xs text-gray-500">{placeholder}</p>
               </div>

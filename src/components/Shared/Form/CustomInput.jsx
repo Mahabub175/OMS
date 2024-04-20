@@ -13,22 +13,43 @@ const CustomInput = ({ type, name, label, placeholder, required }) => {
             label={label}
           >
             {(type === "password" && (
-              <Input.Password
-                {...field}
-                size="large"
-                placeholder={placeholder}
-                required={required}
-                className="mt-2 hover:border-primary border-2 focus:border-primary"
-              />
-            )) ||
-              (type === "textarea" && (
-                <Input.TextArea
+              <ConfigProvider
+                theme={{
+                  components: {
+                    Input: {
+                      activeBorderColor: "#FF8100",
+                      hoverBorderColor: "#FF8100",
+                    },
+                  },
+                }}
+              >
+                <Input.Password
                   {...field}
                   size="large"
                   placeholder={placeholder}
                   required={required}
-                  className="mt-2 hover:border-primary border-2 focus:border-primary"
                 />
+              </ConfigProvider>
+            )) ||
+              (type === "textarea" && (
+                <ConfigProvider
+                  theme={{
+                    components: {
+                      Input: {
+                        activeBorderColor: "#FF8100",
+                        hoverBorderColor: "#FF8100",
+                      },
+                    },
+                  }}
+                >
+                  <Input.TextArea
+                    {...field}
+                    size="large"
+                    placeholder={placeholder}
+                    required={required}
+                    className="mt-2 hover:border-primary border-2 focus:border-primary"
+                  />
+                </ConfigProvider>
               )) ||
               (type === "date" && (
                 <ConfigProvider
@@ -36,6 +57,7 @@ const CustomInput = ({ type, name, label, placeholder, required }) => {
                     components: {
                       DatePicker: {
                         activeBorderColor: "#FF8100",
+                        hoverBorderColor: "#FF8100",
                       },
                     },
                   }}
@@ -45,18 +67,28 @@ const CustomInput = ({ type, name, label, placeholder, required }) => {
                     size="large"
                     placeholder={placeholder}
                     required={required}
-                    className="mt-2 w-full hover:border-primary border-2 focus:border-primary"
+                    className="w-full"
                   />
                 </ConfigProvider>
               )) || (
-                <Input
-                  {...field}
-                  type={type}
-                  size="large"
-                  required={required}
-                  placeholder={placeholder}
-                  className="mt-2 hover:border-primary border-2 focus:border-primary"
-                />
+                <ConfigProvider
+                  theme={{
+                    components: {
+                      Input: {
+                        activeBorderColor: "#FF8100",
+                        hoverBorderColor: "#FF8100",
+                      },
+                    },
+                  }}
+                >
+                  <Input
+                    {...field}
+                    type={type}
+                    size="large"
+                    required={required}
+                    placeholder={placeholder}
+                  />
+                </ConfigProvider>
               )}
           </Form.Item>
         )}
