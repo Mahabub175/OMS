@@ -2,9 +2,11 @@ import { useAddBookMutation } from "../../../redux/services/book/bookApi";
 import { toast } from "sonner";
 import BookForm from "../../../components/AllSection/Test/BookForm";
 import dayjs from "dayjs";
+import { useFormContext } from "react-hook-form";
 
 const CreateBook = ({ open, setOpen }) => {
   const [addBook, { isLoading }] = useAddBookMutation();
+  const methods = useFormContext();
 
   const onSubmit = async (data) => {
     const submittedData = {
@@ -27,6 +29,7 @@ const CreateBook = ({ open, setOpen }) => {
       if (res.data.success) {
         toast.success(res.data.message);
         setOpen(false);
+        methods.reset();
       } else {
         toast.error(res.data.message);
       }

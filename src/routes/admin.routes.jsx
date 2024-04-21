@@ -66,24 +66,24 @@ export const adminPaths = [
     ],
   },
   {
-    name: "Commission",
+    name: "Commissions",
     icon: FaHandHoldingUsd,
     children: [
       {
         name: "Commission",
-        path: "purchases",
+        path: "commission",
         icon: FaHandHoldingUsd,
         element: <Quotation />,
       },
     ],
   },
   {
-    name: "Capital",
+    name: "Capitals",
     icon: FaCartShopping,
     children: [
       {
         name: "Capital",
-        path: "sales",
+        path: "capital",
         icon: TbDashboard,
         element: <Quotation />,
       },
@@ -94,15 +94,15 @@ export const adminPaths = [
     icon: FaMoneyBillWave,
     children: [
       {
-        name: "Sales",
-        path: "expenses",
+        name: "Sale",
+        path: "sale",
         icon: TbDashboard,
         element: <Quotation />,
       },
     ],
   },
   {
-    name: "Loan",
+    name: "Loans",
     icon: GiTakeMyMoney,
     children: [
       {

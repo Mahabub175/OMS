@@ -4,14 +4,21 @@ import { Space, Table } from "antd";
 import { MdDelete } from "react-icons/md";
 import { FaEdit, FaEye } from "react-icons/fa";
 import CreateBook from "./CreateBook";
-import { useGetBooksQuery } from "../../../redux/services/book/bookApi";
+import {
+  useGetBooksQuery,
+  useGetSingleBookQuery,
+} from "../../../redux/services/book/bookApi";
 import DeleteModal from "../../../components/Shared/Modal/DeleteModal";
+import DetailsModal from "../../../components/Shared/Modal/DetailsModal";
+import EditBook from "./EditBook";
 
 const Books = () => {
   const [open, setOpen] = useState(false);
-  const [modalOpen, setModalOpen] = useState(false);
+  const [detailsModalOpen, setDetailsModalOpen] = useState(false);
+  const [deleteModalOpen, setDeleteModalOpen] = useState(false);
   const [itemId, setItemId] = useState(null);
-  const { data: books } = useGetBooksQuery();
+  const { data: books, isLoading } = useGetBooksQuery();
+  const { data: bookData } = useGetSingleBookQuery(itemId, { skip: !itemId });
 
   const columns = [
     {
@@ -71,18 +78,30 @@ const Books = () => {
       align: "center",
       render: (item) => (
         <Space size="middle">
-          <button className="bg-secondary p-2 rounded-xl text-white hover:scale-110 duration-300">
+          <button
+            onClick={() => {
+              setItemId(item.key);
+              setDetailsModalOpen(true);
+            }}
+            className="bg-secondary p-2 rounded-xl text-white hover:scale-110 duration-300"
+          >
             <FaEye />
           </button>
-          <button className="bg-excel p-2 rounded-xl text-white hover:scale-110 duration-300">
+          <button
+            onClick={() => {
+              setItemId(item.key);
+              setOpen(true);
+            }}
+            className="bg-green-500 p-2 rounded-xl text-white hover:scale-110 duration-300"
+          >
             <FaEdit />
           </button>
           <button
             onClick={() => {
               setItemId(item.key);
-              setModalOpen(true);
+              setDeleteModalOpen(true);
             }}
-            className="bg-pdf p-2 rounded-xl text-white hover:scale-110 duration-300"
+            className="bg-red-500 p-2 rounded-xl text-white hover:scale-110 duration-300"
           >
             <MdDelete />
           </button>
@@ -109,13 +128,22 @@ const Books = () => {
         pagination={false}
         dataSource={tableData}
         className="mt-10"
+        loading={isLoading}
       />
 
       <CreateBook open={open} setOpen={setOpen} />
+      <EditBook itemId={itemId} modalOpen={open} setModalOpen={setOpen} />
+      <DetailsModal
+        itemId={itemId}
+        modalOpen={detailsModalOpen}
+        setModalOpen={setDetailsModalOpen}
+        title={"Book"}
+        details={bookData?.data}
+      />
       <DeleteModal
         itemId={itemId}
-        modalOpen={modalOpen}
-        setModalOpen={setModalOpen}
+        modalOpen={deleteModalOpen}
+        setModalOpen={setDeleteModalOpen}
       />
     </div>
   );

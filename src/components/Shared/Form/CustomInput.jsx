@@ -1,7 +1,14 @@
 import { ConfigProvider, DatePicker, Form, Input } from "antd";
 import { Controller } from "react-hook-form";
 
-const CustomInput = ({ type, name, label, placeholder, required }) => {
+const CustomInput = ({
+  type,
+  name,
+  label,
+  placeholder,
+  required,
+  defaultValue,
+}) => {
   return (
     <>
       <Controller
@@ -66,10 +73,10 @@ const CustomInput = ({ type, name, label, placeholder, required }) => {
                     {...field}
                     size="large"
                     allowClear
+                    defaultValue={defaultValue}
                     placeholder={placeholder}
                     required={required}
                     className="w-full"
-                    format={"YYYY-MM-DD"}
                   />
                 </ConfigProvider>
               )) || (
@@ -86,6 +93,7 @@ const CustomInput = ({ type, name, label, placeholder, required }) => {
                   <Input
                     {...field}
                     type={type}
+                    defaultValue={defaultValue || ""}
                     size="large"
                     required={required}
                     placeholder={placeholder}
