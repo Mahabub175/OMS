@@ -111,7 +111,7 @@ const Beneficiary = () => {
         columns={columns}
         pagination={false}
         dataSource={data}
-        className="mt-10"
+        className="mt-10 overflow-auto"
       />
 
       <CustomDrawer open={open} setOpen={setOpen} title="Create Beneficiary">

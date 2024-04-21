@@ -1,29 +1,29 @@
 /* eslint-disable no-unused-vars */
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import CustomInput from "../../Shared/Form/CustomInput";
 import FileUploader from "../../Shared/Form/FileUploader";
-import { GoPlusCircle, GoXCircle } from "react-icons/go";
+import { GoPlusCircle, GoX } from "react-icons/go";
 
 const BeneficiaryDrawerForm = () => {
   const [additionalNumbers, setAdditionalNumbers] = useState([]);
 
-  useEffect(() => {
-    setAdditionalNumbers([{ id: 1 }]);
-  }, []);
-
-  const handleAddNumber = () => {
-    setAdditionalNumbers((prevNumbers) => [
-      ...prevNumbers,
-      {
-        id: Date.now(),
-      },
+  const addNumberField = () => {
+    setAdditionalNumbers([
+      ...additionalNumbers,
+      { number: "", name: "", relation: "" },
     ]);
   };
 
-  const handleRemoveNumber = (id) => {
-    setAdditionalNumbers((prevNumbers) =>
-      prevNumbers.filter((number) => number.id !== id)
-    );
+  const handleNumberChange = (index, field, value) => {
+    const updatedNumbers = [...additionalNumbers];
+    updatedNumbers[index][field] = value;
+    setAdditionalNumbers(updatedNumbers);
+  };
+
+  const removeNumberField = (index) => {
+    const updatedNumbers = [...additionalNumbers];
+    updatedNumbers.splice(index, 1);
+    setAdditionalNumbers(updatedNumbers);
   };
   return (
     <>
@@ -109,11 +109,58 @@ const BeneficiaryDrawerForm = () => {
           required={false}
         />
       </div>
+      {additionalNumbers.map((number, index) => (
+        <div key={index} className="">
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 items-center">
+            <CustomInput
+              label={"Phone Number"}
+              name={`extra_number_${index}`}
+              placeholder={"Enter Phone Number"}
+              type={"number"}
+              value={number.number}
+              onChange={(e) =>
+                handleNumberChange(index, "number", e.target.value)
+              }
+              required={false}
+            />
+            <CustomInput
+              label={"Name"}
+              name={`extra_name_${index}`}
+              placeholder={"Enter Name"}
+              type={"name"}
+              value={number.name}
+              onChange={(e) =>
+                handleNumberChange(index, "name", e.target.value)
+              }
+              required={false}
+            />
+            <CustomInput
+              label={"Relation"}
+              name={`relation_${index}`}
+              placeholder={"Enter Relation"}
+              type={"text"}
+              value={number.relation}
+              onChange={(e) =>
+                handleNumberChange(index, "relation", e.target.value)
+              }
+              required={false}
+            />
+          </div>
+          <div className=" flex justify-center items-center">
+            <button
+              onClick={() => removeNumberField(index)}
+              className="text-red-500 bg-light p-2 rounded"
+            >
+              <GoX className="text-xl font-bold" />
+            </button>
+          </div>
+        </div>
+      ))}
 
-      <div className="flex justify-center mt-4">
+      <div className="flex justify-center mt-10">
         <button
           className="flex items-center bg-light px-10 py-2 font-bold rounded"
-          onClick={handleAddNumber}
+          onClick={addNumberField}
         >
           Add Number
           <GoPlusCircle className="ml-2" />
