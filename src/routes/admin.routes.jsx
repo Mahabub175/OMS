@@ -32,6 +32,7 @@ import { IoIosPeople } from "react-icons/io";
 import Beneficiary from "../pages/Dashboard/Loan/Beneficiary";
 import Installment from "../pages/Dashboard/Loan/Installment";
 import Loan from "../pages/Dashboard/Loan/Loan";
+import Books from "../pages/Dashboard/Test/Books";
 
 export const adminPaths = [
   {
@@ -175,6 +176,18 @@ export const adminPaths = [
         path: "peoples",
         icon: TbDashboard,
         element: <Quotation />,
+      },
+    ],
+  },
+  {
+    name: "Test",
+    icon: MdPeopleAlt,
+    children: [
+      {
+        name: "Books",
+        path: "books",
+        icon: TbDashboard,
+        element: <Books />,
       },
     ],
   },

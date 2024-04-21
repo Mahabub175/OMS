@@ -1,7 +1,26 @@
 import { Button, Modal } from "antd";
 import { SubmitButton } from "../Button/CustomButton";
+import { useDeleteBookMutation } from "../../../redux/services/book/bookApi";
+import { toast } from "sonner";
 
-const DeleteModal = ({ modalOpen, setModalOpen }) => {
+const DeleteModal = ({ modalOpen, setModalOpen, itemId }) => {
+  const [deleteBook] = useDeleteBookMutation();
+  const handleDelete = async () => {
+    try {
+      const res = await deleteBook(itemId);
+      if (res.data.success) {
+        setModalOpen(false);
+        toast.success(res.data.message);
+      } else {
+        setModalOpen(false);
+        toast.error(res.data.message);
+      }
+    } catch (error) {
+      console.error("Error deleting book:", error);
+      setModalOpen(false);
+      toast.error("An error occurred while deleting the book.");
+    }
+  };
   return (
     <Modal
       centered
@@ -22,7 +41,7 @@ const DeleteModal = ({ modalOpen, setModalOpen }) => {
           >
             Cancel
           </Button>
-          <SubmitButton text={"Delete"} />
+          <SubmitButton func={handleDelete} text={"Delete"} />
         </div>
       </div>
     </Modal>

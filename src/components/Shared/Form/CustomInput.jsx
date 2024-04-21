@@ -65,9 +65,11 @@ const CustomInput = ({ type, name, label, placeholder, required }) => {
                   <DatePicker
                     {...field}
                     size="large"
+                    allowClear
                     placeholder={placeholder}
                     required={required}
                     className="w-full"
+                    format={"YYYY-MM-DD"}
                   />
                 </ConfigProvider>
               )) || (
