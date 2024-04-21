@@ -1,10 +1,10 @@
 import { Drawer } from "antd";
 import { GiCancel } from "react-icons/gi";
 
-const CustomDrawer = ({ setOpen, open, children, title }) => {
+const CustomDrawer = ({ setOpen, open, children, title, placement }) => {
   return (
     <Drawer
-      placement="right"
+      placement={placement}
       width={1000}
       onClose={() => setOpen(false)}
       open={open}

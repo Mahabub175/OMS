@@ -8,65 +8,8 @@ import BeneficiaryDrawerForm from "../../../components/AllSection/Loan/Beneficia
 import { Space, Table } from "antd";
 import { MdDelete } from "react-icons/md";
 import { FaEdit, FaEye } from "react-icons/fa";
+import DeleteModal from "../../../components/Shared/Modal/DeleteModal";
 
-const columns = [
-  {
-    title: "Image",
-    dataIndex: "image",
-    key: "image",
-    align: "center",
-    render: (image) => (
-      <img
-        src={image}
-        alt="Beneficiary"
-        className="w-12 h-12 mx-auto rounded-full"
-      />
-    ),
-  },
-  {
-    title: "Name",
-    dataIndex: "name",
-    key: "name",
-    align: "center",
-  },
-  {
-    title: "Join Date",
-    dataIndex: "join_date",
-    key: "join_date",
-    align: "center",
-  },
-  {
-    title: "Email",
-    dataIndex: "email",
-    key: "email",
-    align: "center",
-  },
-  {
-    title: "Status",
-    dataIndex: "status",
-    key: "status",
-    align: "center",
-  },
-
-  {
-    title: "Action",
-    key: "action",
-    align: "center",
-    render: () => (
-      <Space size="middle">
-        <button className="bg-secondary p-2 rounded-xl text-white hover:scale-110 duration-300">
-          <FaEye />
-        </button>
-        <button className="bg-excel p-2 rounded-xl text-white hover:scale-110 duration-300">
-          <FaEdit />
-        </button>
-        <button className="bg-pdf p-2 rounded-xl text-white hover:scale-110 duration-300">
-          <MdDelete />
-        </button>
-      </Space>
-    ),
-  },
-];
 const data = [
   {
     key: "1",
@@ -99,10 +42,75 @@ const data = [
 
 const Beneficiary = () => {
   const [open, setOpen] = useState(false);
+  const [modalOpen, setModalOpen] = useState(false);
 
   const onSubmit = (data) => {
     console.log(data);
   };
+  const columns = [
+    {
+      title: "Image",
+      dataIndex: "image",
+      key: "image",
+      align: "center",
+      render: (image) => (
+        <img
+          src={image}
+          alt="Beneficiary"
+          className="w-12 h-12 mx-auto rounded-full"
+        />
+      ),
+    },
+    {
+      title: "Name",
+      dataIndex: "name",
+      key: "name",
+      align: "center",
+    },
+    {
+      title: "Join Date",
+      dataIndex: "join_date",
+      key: "join_date",
+      align: "center",
+    },
+    {
+      title: "Email",
+      dataIndex: "email",
+      key: "email",
+      align: "center",
+    },
+    {
+      title: "Status",
+      dataIndex: "status",
+      key: "status",
+      align: "center",
+    },
+
+    {
+      title: "Action",
+      key: "action",
+      align: "center",
+      render: () => (
+        <Space size="middle">
+          <button className="bg-secondary p-2 rounded-xl text-white hover:scale-110 duration-300">
+            <FaEye />
+          </button>
+          <button
+            onClick={() => setOpen(true)}
+            className="bg-excel p-2 rounded-xl text-white hover:scale-110 duration-300"
+          >
+            <FaEdit />
+          </button>
+          <button
+            onClick={() => setModalOpen(true)}
+            className="bg-pdf p-2 rounded-xl text-white hover:scale-110 duration-300"
+          >
+            <MdDelete />
+          </button>
+        </Space>
+      ),
+    },
+  ];
   return (
     <div className="px-5">
       <TableHeader setOpen={setOpen} title={"Loan Beneficiary"} />
@@ -114,7 +122,12 @@ const Beneficiary = () => {
         className="mt-10 overflow-auto"
       />
 
-      <CustomDrawer open={open} setOpen={setOpen} title="Create Beneficiary">
+      <CustomDrawer
+        open={open}
+        setOpen={setOpen}
+        placement={"right"}
+        title="Create Beneficiary"
+      >
         <CustomForm onSubmit={onSubmit}>
           <BeneficiaryDrawerForm />
           <div className="flex justify-end items-center gap-4 mt-20">
@@ -129,6 +142,8 @@ const Beneficiary = () => {
           </div>
         </CustomForm>
       </CustomDrawer>
+
+      <DeleteModal modalOpen={modalOpen} setModalOpen={setModalOpen} />
     </div>
   );
 };
