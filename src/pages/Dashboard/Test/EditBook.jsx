@@ -1,16 +1,23 @@
 import dayjs from "dayjs";
-import BookForm from "../../../components/AllSection/Test/BookForm";
 import CustomDrawer from "../../../components/Shared/Drawer/CustomDrawer";
 import {
   useGetSingleBookQuery,
   useUpdateBookMutation,
 } from "../../../redux/services/book/bookApi";
 import { toast } from "sonner";
+import CustomForm from "../../../components/Shared/Form/CustomForm";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { updateBookValidationSchema } from "../../../utilities/validationSchemas/bookValidation.schema";
+import CustomInput from "../../../components/Shared/Form/CustomInput";
+import CustomDatePicker from "../../../components/Shared/Form/CustomDatePicker";
+import FileUploader from "../../../components/Shared/Form/FileUploader";
+import { Button } from "antd";
+import { SubmitButton } from "../../../components/Shared/Button/CustomButton";
 
 const EditBook = ({ open, setOpen, itemId }) => {
   const { data: bookData } = useGetSingleBookQuery(itemId, { skip: !itemId });
 
-  const [updateBook] = useUpdateBookMutation();
+  const [updateBook, { isLoading }] = useUpdateBookMutation();
 
   const onSubmit = async (data) => {
     try {
@@ -21,28 +28,15 @@ const EditBook = ({ open, setOpen, itemId }) => {
           ? data.image
           : bookData?.data?.image;
 
-      let submittedData;
-
-      submittedData = {
+      const submittedData = {
         title: data.title || bookData?.data?.title,
         publication_date: data?.publication_date
           ? dayjs(data.publication_date).format("YYYY-MM-DD")
           : bookData?.data?.publication_date,
         isbn: data.isbn || bookData?.data?.isbn,
+        ...(data.image !== undefined && { image }),
         status: true,
       };
-
-      if (data?.image !== undefined) {
-        submittedData = {
-          title: data.title || bookData?.data?.title,
-          publication_date: data?.publication_date
-            ? dayjs(data.publication_date).format("YYYY-MM-DD")
-            : bookData?.data?.publication_date,
-          isbn: data.isbn || bookData?.data?.isbn,
-          image: image,
-          status: true,
-        };
-      }
 
       const updatedBookData = new FormData();
       Object.entries(submittedData).forEach(([key, value]) => {
@@ -68,6 +62,8 @@ const EditBook = ({ open, setOpen, itemId }) => {
     }
   };
 
+  const defaultValue = bookData?.data;
+
   return (
     <CustomDrawer
       open={open}
@@ -75,11 +71,52 @@ const EditBook = ({ open, setOpen, itemId }) => {
       title="Edit Book"
       placement={"left"}
     >
-      <BookForm
-        defaultValue={bookData?.data}
+      <CustomForm
         onSubmit={onSubmit}
-        setOpen={setOpen}
-      />
+        resolver={zodResolver(updateBookValidationSchema)}
+      >
+        <CustomInput
+          label={"Title"}
+          name={"title"}
+          type={"text"}
+          defaultValue={defaultValue?.title}
+          required={false}
+          placeholder={"Enter Book Title"}
+        />
+        <CustomDatePicker
+          label={"Publication Date"}
+          name={"publication_date"}
+          type={"date"}
+          // defaultValue={dayjs(defaultValue?.publication_date, "YYYY-MM-DD")}
+          defaultValue={""}
+          required={false}
+          placeholder={"Enter Publication Date"}
+        />
+        <CustomInput
+          label={"ISBN"}
+          name={"isbn"}
+          defaultValue={defaultValue?.isbn}
+          type={"text"}
+          required={false}
+          placeholder={"Enter ISBN"}
+        />
+
+        <FileUploader
+          label={"Book Cover"}
+          name={"image"}
+          defaultValue={defaultValue?.image}
+        />
+        <div className="flex justify-end items-center gap-4 mt-20">
+          <Button
+            onClick={() => setOpen(false)}
+            type="text"
+            className="font-bold w-full bg-transparent text-pdf px-10 pt-2 pb-8 border border-pdf"
+          >
+            Cancel
+          </Button>
+          <SubmitButton loading={isLoading} text={"Save"} />
+        </div>
+      </CustomForm>
     </CustomDrawer>
   );
 };

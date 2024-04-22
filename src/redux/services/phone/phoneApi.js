@@ -1,75 +1,75 @@
 import { jwtDecode } from "jwt-decode";
 import { baseApi } from "../../api/baseApi";
 
-const bookApi = baseApi.injectEndpoints({
+const phoneApi = baseApi.injectEndpoints({
   endpoints: (build) => ({
-    addBook: build.mutation({
+    addPhone: build.mutation({
       query: (data) => {
         return {
-          url: "/books/",
+          url: "/phones/",
           method: "POST",
           body: data,
         };
       },
-      invalidatesTags: ["books"],
+      invalidatesTags: ["phones"],
     }),
-    getBooks: build.query({
+    getPhones: build.query({
       query: ({ page }) => ({
-        url: `/books/?limit=10&offset=${(page - 1) * 10}`,
+        url: `/phones/?limit=10&offset=${(page - 1) * 10}`,
         method: "GET",
       }),
       transformResponse: (response) => {
         const resData = jwtDecode(response.data.results.token);
-        return { meta: response.data.meta, data: resData.data };
+        return { response: response.data.meta, data: resData.data };
       },
-      providesTags: ["books"],
+      providesTags: ["phones"],
     }),
-    getAllBooks: build.query({
+    getAllPhones: build.query({
       query: () => ({
-        url: `/books/`,
+        url: `/phones/`,
         method: "GET",
       }),
       transformResponse: (response) => {
         const resData = jwtDecode(response.data.results.token);
         return { data: resData.data };
       },
-      providesTags: ["books"],
+      providesTags: ["phones"],
     }),
-    getSingleBook: build.query({
+    getSinglePhone: build.query({
       query: (id) => ({
-        url: `/books/${id}/`,
+        url: `/phones/${id}/`,
         method: "GET",
       }),
       transformResponse: (response) => {
         const resData = jwtDecode(response.data.results.token);
         return resData;
       },
-      providesTags: ["books"],
+      providesTags: ["phones"],
     }),
-    updateBook: build.mutation({
+    updatePhone: build.mutation({
       query: (payload) => ({
-        url: `/books/${payload.id}/`,
+        url: `/phones/${payload.id}/`,
         method: "PATCH",
         body: payload.data,
       }),
-      invalidatesTags: ["books"],
+      invalidatesTags: ["phones"],
     }),
-    deleteBook: build.mutation({
+    deletePhone: build.mutation({
       query: (id) => ({
-        url: `/books/${id}/soft_delete/`,
+        url: `/phones/${id}/soft_delete/`,
         method: "POST",
         body: {},
       }),
-      invalidatesTags: ["books"],
+      invalidatesTags: ["phones"],
     }),
   }),
 });
 
 export const {
-  useAddBookMutation,
-  useGetBooksQuery,
-  useGetAllBooksQuery,
-  useGetSingleBookQuery,
-  useUpdateBookMutation,
-  useDeleteBookMutation,
-} = bookApi;
+  useAddPhoneMutation,
+  useGetPhonesQuery,
+  useGetAllPhonesQuery,
+  useGetSinglePhoneQuery,
+  useUpdatePhoneMutation,
+  useDeletePhoneMutation,
+} = phoneApi;

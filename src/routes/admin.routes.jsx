@@ -7,6 +7,10 @@ import Employee from "../pages/Dashboard/Hrm/Employee/Employee";
 import Attendance from "../pages/Dashboard/Hrm/Attendance/Attendance";
 import Leaves from "../pages/Dashboard/Hrm/Leaves/Leaves";
 import Salary from "../pages/Dashboard/Hrm/Salary/Salary";
+import Beneficiary from "../pages/Dashboard/Loan/Beneficiary";
+import Installment from "../pages/Dashboard/Loan/Installment";
+import Loan from "../pages/Dashboard/Loan/Loan";
+import Books from "../pages/Dashboard/Test/Books";
 
 //icons
 import { TbDashboard } from "react-icons/tb";
@@ -19,7 +23,11 @@ import {
   FaUsers,
 } from "react-icons/fa";
 import { GiReceiveMoney, GiTakeMyMoney } from "react-icons/gi";
-import { MdPeopleAlt, MdOutlineApartment } from "react-icons/md";
+import {
+  MdPeopleAlt,
+  MdOutlineApartment,
+  MdOutlineLocalPhone,
+} from "react-icons/md";
 import {
   FaCartShopping,
   FaMoneyBillWave,
@@ -29,10 +37,8 @@ import {
 } from "react-icons/fa6";
 import { IoPeopleCircle } from "react-icons/io5";
 import { IoIosPeople } from "react-icons/io";
-import Beneficiary from "../pages/Dashboard/Loan/Beneficiary";
-import Installment from "../pages/Dashboard/Loan/Installment";
-import Loan from "../pages/Dashboard/Loan/Loan";
-import Books from "../pages/Dashboard/Test/Books";
+import { PiDotsThreeCircleFill } from "react-icons/pi";
+import Phone from "../pages/Dashboard/Others/Phones/Phone";
 
 export const adminPaths = [
   {
@@ -176,6 +182,18 @@ export const adminPaths = [
         path: "peoples",
         icon: TbDashboard,
         element: <Quotation />,
+      },
+    ],
+  },
+  {
+    name: "Others",
+    icon: PiDotsThreeCircleFill,
+    children: [
+      {
+        name: "Phones",
+        path: "phones",
+        icon: MdOutlineLocalPhone,
+        element: <Phone />,
       },
     ],
   },

@@ -29,3 +29,7 @@
 .ant-form-item-label {
   font-weight: 700 !important;
 }
+
+.three-grid {
+  @apply grid grid-cols-1 lg:grid-cols-3 gap-4;
+}

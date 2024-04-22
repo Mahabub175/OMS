@@ -8,6 +8,7 @@ const CustomInput = ({
   placeholder,
   required,
   defaultValue,
+  max,
 }) => {
   return (
     <Controller
@@ -23,6 +24,7 @@ const CustomInput = ({
             {...field}
             type={type}
             size="large"
+            maxLength={max}
             required={required}
             defaultChecked={defaultValue || null}
             placeholder={placeholder}

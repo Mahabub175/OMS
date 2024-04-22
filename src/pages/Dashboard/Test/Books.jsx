@@ -1,6 +1,6 @@
 import { useState } from "react";
 import TableHeader from "../../../components/Shared/Table/TableHeader";
-import { Space, Table } from "antd";
+import { Pagination, Space, Table } from "antd";
 import { MdDelete } from "react-icons/md";
 import { FaEdit, FaEye } from "react-icons/fa";
 import CreateBook from "./CreateBook";
@@ -18,8 +18,17 @@ const Books = () => {
   const [detailsModalOpen, setDetailsModalOpen] = useState(false);
   const [deleteModalOpen, setDeleteModalOpen] = useState(false);
   const [itemId, setItemId] = useState(null);
-  const { data: books, isLoading } = useGetBooksQuery();
+  const [currentPage, setCurrentPage] = useState(1);
+
+  const { data: books, isLoading } = useGetBooksQuery({
+    page: currentPage,
+  });
+
   const { data: bookData } = useGetSingleBookQuery(itemId, { skip: !itemId });
+
+  const handlePageChange = (page) => {
+    setCurrentPage(page);
+  };
 
   const columns = [
     {
@@ -130,6 +139,13 @@ const Books = () => {
         dataSource={tableData}
         className="mt-10"
         loading={isLoading}
+      />
+      <Pagination
+        className="flex justify-center mt-10"
+        total={books?.meta?.count}
+        current={currentPage}
+        onChange={handlePageChange}
+        simple
       />
 
       <CreateBook open={open} setOpen={setOpen} />

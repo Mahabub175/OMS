@@ -27,6 +27,9 @@ const theme = {
       colorPrimary: "#FF8100",
       colorPrimaryHover: "#FF8100",
     },
+    Pagination: {
+      itemActiveBg: "#FF8100",
+    },
   },
   token: {},
 };
