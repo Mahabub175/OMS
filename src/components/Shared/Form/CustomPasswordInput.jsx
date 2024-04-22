@@ -1,8 +1,7 @@
 import { Form, Input } from "antd";
 import { Controller } from "react-hook-form";
 
-const CustomInput = ({
-  type,
+const CustomPasswordInput = ({
   name,
   label,
   placeholder,
@@ -12,20 +11,18 @@ const CustomInput = ({
   return (
     <Controller
       name={name}
-      defaultValue={defaultValue || null}
+      defaultValue={defaultValue}
       render={({ field, fieldState: { error } }) => (
         <Form.Item
           validateStatus={error ? "error" : ""}
           help={error ? error.message : null}
           label={label}
         >
-          <Input
+          <Input.Password
             {...field}
-            type={type}
             size="large"
-            required={required}
-            defaultChecked={defaultValue || null}
             placeholder={placeholder}
+            required={required}
           />
         </Form.Item>
       )}
@@ -33,4 +30,4 @@ const CustomInput = ({
   );
 };
 
-export default CustomInput;
+export default CustomPasswordInput;

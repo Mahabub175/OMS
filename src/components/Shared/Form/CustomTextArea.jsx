@@ -1,8 +1,7 @@
 import { Form, Input } from "antd";
 import { Controller } from "react-hook-form";
 
-const CustomInput = ({
-  type,
+const CustomTextArea = ({
   name,
   label,
   placeholder,
@@ -12,20 +11,19 @@ const CustomInput = ({
   return (
     <Controller
       name={name}
-      defaultValue={defaultValue || null}
+      defaultValue={defaultValue}
       render={({ field, fieldState: { error } }) => (
         <Form.Item
           validateStatus={error ? "error" : ""}
           help={error ? error.message : null}
           label={label}
         >
-          <Input
+          <Input.TextArea
             {...field}
-            type={type}
             size="large"
-            required={required}
-            defaultChecked={defaultValue || null}
             placeholder={placeholder}
+            required={required}
+            className="mt-2 hover:border-primary border-2 focus:border-primary"
           />
         </Form.Item>
       )}
@@ -33,4 +31,4 @@ const CustomInput = ({
   );
 };
 
-export default CustomInput;
+export default CustomTextArea;

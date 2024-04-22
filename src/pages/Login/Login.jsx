@@ -5,10 +5,11 @@ import { setUser } from "../../redux/services/auth/authSlice";
 import { verifyToken } from "../../utilities/lib/verifyToken";
 import { toast } from "sonner";
 import { useNavigate } from "react-router-dom";
-import CustomInput from "../../components/Shared/Form/CustomInput";
-import CustomForm from "../../components/Shared/Form/CustomForm";
 import { loginValidationSchema } from "../../utilities/validationSchemas/loginValidation.schema";
 import { zodResolver } from "@hookform/resolvers/zod";
+import CustomForm from "../../components/Shared/Form/CustomForm";
+import CustomInput from "../../components/Shared/Form/CustomInput";
+import CustomPasswordInput from "../../components/Shared/Form/CustomPasswordInput";
 
 const Login = () => {
   const dispatch = useDispatch();
@@ -41,13 +42,13 @@ const Login = () => {
           className="flex flex-col gap-6"
         >
           <CustomInput
-            label="Email"
+            label="Email or Username"
             type={"text"}
             required={true}
             name={"email"}
             placeholder={"Email or Username"}
           />
-          <CustomInput
+          <CustomPasswordInput
             label="Password"
             type={"password"}
             name={"password"}

@@ -14,6 +14,7 @@ import EditBook from "./EditBook";
 
 const Books = () => {
   const [open, setOpen] = useState(false);
+  const [openEdit, setOpenEdit] = useState(false);
   const [detailsModalOpen, setDetailsModalOpen] = useState(false);
   const [deleteModalOpen, setDeleteModalOpen] = useState(false);
   const [itemId, setItemId] = useState(null);
@@ -90,7 +91,7 @@ const Books = () => {
           <button
             onClick={() => {
               setItemId(item.key);
-              setOpen(true);
+              setOpenEdit(true);
             }}
             className="bg-green-500 p-2 rounded-xl text-white hover:scale-110 duration-300"
           >
@@ -132,7 +133,7 @@ const Books = () => {
       />
 
       <CreateBook open={open} setOpen={setOpen} />
-      <EditBook itemId={itemId} modalOpen={open} setModalOpen={setOpen} />
+      <EditBook itemId={itemId} open={openEdit} setOpen={setOpenEdit} />
       <DetailsModal
         itemId={itemId}
         modalOpen={detailsModalOpen}

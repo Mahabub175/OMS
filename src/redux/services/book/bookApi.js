@@ -4,11 +4,11 @@ import { baseApi } from "../../api/baseApi";
 const bookApi = baseApi.injectEndpoints({
   endpoints: (build) => ({
     addBook: build.mutation({
-      query: (bookInfo) => {
+      query: (data) => {
         return {
           url: "/books/",
           method: "POST",
-          body: bookInfo,
+          body: data,
         };
       },
       invalidatesTags: ["books"],
@@ -19,8 +19,8 @@ const bookApi = baseApi.injectEndpoints({
         method: "GET",
       }),
       transformResponse: (response) => {
-        const bookData = jwtDecode(response.data.results.token);
-        return bookData;
+        const resData = jwtDecode(response.data.results.token);
+        return resData;
       },
       providesTags: ["books"],
     }),
@@ -30,10 +30,18 @@ const bookApi = baseApi.injectEndpoints({
         method: "GET",
       }),
       transformResponse: (response) => {
-        const bookData = jwtDecode(response.data.results.token);
-        return bookData;
+        const resData = jwtDecode(response.data.results.token);
+        return resData;
       },
       providesTags: ["books"],
+    }),
+    updateBook: build.mutation({
+      query: (payload) => ({
+        url: `/books/${payload.id}/`,
+        method: "PATCH",
+        body: payload.data,
+      }),
+      invalidatesTags: ["books"],
     }),
     deleteBook: build.mutation({
       query: (id) => ({
@@ -49,6 +57,7 @@ const bookApi = baseApi.injectEndpoints({
 export const {
   useAddBookMutation,
   useGetBooksQuery,
-  useDeleteBookMutation,
   useGetSingleBookQuery,
+  useUpdateBookMutation,
+  useDeleteBookMutation,
 } = bookApi;

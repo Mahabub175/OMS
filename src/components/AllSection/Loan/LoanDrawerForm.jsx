@@ -1,3 +1,4 @@
+import CustomDatePicker from "../../Shared/Form/CustomDatePicker";
 import CustomInput from "../../Shared/Form/CustomInput";
 import CustomSelect from "../../Shared/Form/CustomSelect";
 import FileUploader from "../../Shared/Form/FileUploader";
@@ -28,21 +29,21 @@ const LoanDrawerForm = () => {
           required={true}
         />
 
-        <CustomInput
+        <CustomDatePicker
           label={"Return Date"}
           type={"date"}
           placeholder={"Select Return Date"}
           name={"return_date"}
           required={true}
         />
-        <CustomInput
+        <CustomDatePicker
           label={"Return Date Installment"}
           type={"date"}
           placeholder={"Select Return Date Installment"}
           name={"return_date_installment"}
           required={true}
         />
-        <CustomInput
+        <CustomDatePicker
           label={"Date"}
           type={"date"}
           placeholder={"Select Date"}

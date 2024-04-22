@@ -1,41 +1,32 @@
 import { Controller } from "react-hook-form";
-import { ConfigProvider, Form, Select } from "antd";
+import { Form, Select } from "antd";
 
-const CustomSelect = ({ label, name, placeholder, mode }) => {
+const CustomSelect = ({ label, name, placeholder, mode, defaultValue }) => {
   return (
     <>
       <Controller
-        name={name}
+        name={name || "test"}
+        defaultValue={defaultValue || null}
         render={({ field, fieldState: { error } }) => (
           <Form.Item
             validateStatus={error ? "error" : ""}
             help={error ? error.message : null}
-            label={label}
+            label={label || ""}
           >
-            <ConfigProvider
-              theme={{
-                components: {
-                  Select: {
-                    colorPrimary: "#FF8100",
-                    colorPrimaryHover: "#FF8100",
-                  },
-                },
-              }}
-            >
-              <Select
-                {...field}
-                mode={mode || undefined}
-                placeholder={placeholder}
-                allowClear
-                size="large"
-                options={[
-                  { value: "jack", label: "Jack" },
-                  { value: "lucy", label: "Lucy" },
-                  { value: "Yiminghe", label: "yiminghe" },
-                  { value: "disabled", label: "Disabled", disabled: true },
-                ]}
-              />
-            </ConfigProvider>
+            <Select
+              {...field}
+              mode={mode || undefined}
+              placeholder={placeholder || null}
+              allowClear
+              defaultValue={defaultValue || null}
+              size="large"
+              options={[
+                { value: "jack", label: "Jack" },
+                { value: "lucy", label: "Lucy" },
+                { value: "Yiminghe", label: "yiminghe" },
+                { value: "disabled", label: "Disabled", disabled: true },
+              ]}
+            />
           </Form.Item>
         )}
       />

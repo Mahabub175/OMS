@@ -1,8 +1,7 @@
-import { Form, Input } from "antd";
+import { DatePicker, Form } from "antd";
 import { Controller } from "react-hook-form";
 
-const CustomInput = ({
-  type,
+const CustomDatePicker = ({
   name,
   label,
   placeholder,
@@ -19,13 +18,14 @@ const CustomInput = ({
           help={error ? error.message : null}
           label={label}
         >
-          <Input
+          <DatePicker
             {...field}
-            type={type}
             size="large"
-            required={required}
-            defaultChecked={defaultValue || null}
+            allowClear
             placeholder={placeholder}
+            defaultValue={defaultValue || null}
+            required={required}
+            className="w-full"
           />
         </Form.Item>
       )}
@@ -33,4 +33,4 @@ const CustomInput = ({
   );
 };
 
-export default CustomInput;
+export default CustomDatePicker;
