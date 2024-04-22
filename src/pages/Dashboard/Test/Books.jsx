@@ -69,12 +69,11 @@ const Books = () => {
       align: "center",
       render: (status) => (
         <>
-          {status === true && (
+          {status ? (
             <span className="bg-green-500 text-white px-2 py-1 rounded-md font-bold">
               Active
             </span>
-          )}
-          {status === false && (
+          ) : (
             <span className="bg-red-500 text-white px-2 py-1 rounded-md font-bold">
               Inactive
             </span>
