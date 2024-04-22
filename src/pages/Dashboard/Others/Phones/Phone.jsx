@@ -4,10 +4,10 @@ import CreatePhone from "./CreatePhone";
 
 const Phone = () => {
   const [open, setOpen] = useState(false);
-  const [openEdit, setOpenEdit] = useState(false);
-  const [detailsModalOpen, setDetailsModalOpen] = useState(false);
-  const [deleteModalOpen, setDeleteModalOpen] = useState(false);
-  const [itemId, setItemId] = useState(null);
+  // const [openEdit, setOpenEdit] = useState(false);
+  // const [detailsModalOpen, setDetailsModalOpen] = useState(false);
+  // const [deleteModalOpen, setDeleteModalOpen] = useState(false);
+  // const [itemId, setItemId] = useState(null);
   return (
     <div className="px-5">
       <TableHeader setOpen={setOpen} title={"Phones"} />

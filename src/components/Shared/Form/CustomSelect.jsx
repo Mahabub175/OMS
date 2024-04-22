@@ -1,17 +1,34 @@
-import { Controller } from "react-hook-form";
+import { Controller, useFormContext } from "react-hook-form";
 import { Form, Select } from "antd";
 
-const CustomSelect = ({ label, name, placeholder, mode, defaultValue }) => {
+const CustomSelect = ({
+  label,
+  name,
+  placeholder,
+  mode,
+  defaultValue,
+  required,
+}) => {
+  const { control } = useFormContext();
+
+  const fallbackLabel = "Select";
+
   return (
     <>
       <Controller
         name={name || "test"}
+        control={control}
         defaultValue={defaultValue || null}
+        rules={{
+          required: required
+            ? `${label || fallbackLabel} is required.`
+            : undefined,
+        }}
         render={({ field, fieldState: { error } }) => (
           <Form.Item
             validateStatus={error ? "error" : ""}
             help={error ? error.message : null}
-            label={label || ""}
+            label={label || fallbackLabel}
           >
             <Select
               {...field}

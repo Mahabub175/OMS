@@ -1,19 +1,17 @@
-import { toast } from "sonner";
-import { zodResolver } from "@hookform/resolvers/zod";
 import { Button } from "antd";
-import { useAddBookMutation } from "../../../../redux/services/book/bookApi";
+import { toast } from "sonner";
+import { SubmitButton } from "../../../../components/Shared/Button/CustomButton";
 import CustomDrawer from "../../../../components/Shared/Drawer/CustomDrawer";
 import CustomForm from "../../../../components/Shared/Form/CustomForm";
 import CustomInput from "../../../../components/Shared/Form/CustomInput";
-import { SubmitButton } from "../../../../components/Shared/Button/CustomButton";
 import CustomSelect from "../../../../components/Shared/Form/CustomSelect";
-import { createPhoneValidationSchema } from "../../../../utilities/validationSchemas/phoneValidation.schema";
+import { useAddPhoneMutation } from "../../../../redux/services/phone/phoneApi";
 
 const CreatePhone = ({ open, setOpen }) => {
-  const [addBook, { isLoading }] = useAddBookMutation();
+  const [addPhone, { isLoading }] = useAddPhoneMutation();
 
-  const onSubmit = async (data) => {
-    const toastId = toast.loading("Creating Book...");
+  const onSubmit = async (data, methods) => {
+    const toastId = toast.loading("Creating Phone...");
     const submittedData = {
       name: data.name,
       relation: data.relation,
@@ -30,16 +28,17 @@ const CreatePhone = ({ open, setOpen }) => {
     });
 
     try {
-      const res = await addBook(phoneData);
+      const res = await addPhone(phoneData);
       if (res.data.success) {
         toast.success(res.data.message, { id: toastId, duration: 2000 });
         setOpen(false);
+        methods.reset();
       } else {
         toast.error(res.data.message, { id: toastId, duration: 2000 });
       }
     } catch (error) {
-      console.error("Error creating book:", error);
-      toast.error("An error occurred while creating the book.", {
+      console.error("Error creating phone:", error);
+      toast.error("An error occurred while creating the phone.", {
         id: toastId,
         duration: 2000,
       });
@@ -47,10 +46,7 @@ const CreatePhone = ({ open, setOpen }) => {
   };
   return (
     <CustomDrawer open={open} setOpen={setOpen} title="Create Phone">
-      <CustomForm
-        onSubmit={onSubmit}
-        resolver={zodResolver(createPhoneValidationSchema)}
-      >
+      <CustomForm onSubmit={onSubmit}>
         <div className="three-grid">
           <CustomInput
             label={"Name"}
@@ -78,6 +74,7 @@ const CreatePhone = ({ open, setOpen }) => {
           label={"Role"}
           name={"role"}
           placeholder={"Select a role"}
+          required={true}
         />
 
         <div className="flex justify-end items-center gap-4 mt-20">

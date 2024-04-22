@@ -1,17 +1,23 @@
 import { Form, Input, Button } from "antd";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { Controller } from "react-hook-form";
 import { MdDelete } from "react-icons/md";
 import { FaFileAlt } from "react-icons/fa";
 
-const FileUploader = ({ name, label, placeholder, required, defaultValue }) => {
-  const [filePreview, setFilePreview] = useState(null);
-
+const FileUploader = ({
+  name,
+  label,
+  placeholder,
+  required,
+  defaultValue,
+  filePreview,
+  setFilePreview,
+}) => {
   useEffect(() => {
     if (defaultValue && defaultValue.includes("http")) {
       setFilePreview(defaultValue);
     }
-  }, [defaultValue]);
+  }, [defaultValue, setFilePreview]);
 
   const handleFileChange = (e) => {
     const file = e.target.files[0];

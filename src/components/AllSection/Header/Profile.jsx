@@ -25,7 +25,7 @@ const Profile = () => {
     <div className="flex justify-between items-center mt-3">
       <div className="flex items-center ml-4">
         <div className="font-bold text-2xl text-primary cursor-pointer">
-          Falaq Oil
+          OMS
         </div>
       </div>
       <Popover placement="bottomLeft" content={content} className="mr-4">

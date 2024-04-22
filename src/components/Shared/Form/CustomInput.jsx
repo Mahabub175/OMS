@@ -1,5 +1,5 @@
 import { Form, Input } from "antd";
-import { Controller } from "react-hook-form";
+import { Controller, useFormContext } from "react-hook-form";
 
 const CustomInput = ({
   type,
@@ -10,23 +10,31 @@ const CustomInput = ({
   defaultValue,
   max,
 }) => {
+  const { control } = useFormContext();
+
+  const fallbackLabel = "This Field";
+
   return (
     <Controller
       name={name}
-      defaultValue={defaultValue || null}
+      control={control}
+      defaultValue={defaultValue || ""}
+      rules={{
+        required: required
+          ? `${label || fallbackLabel} is required.`
+          : undefined,
+      }}
       render={({ field, fieldState: { error } }) => (
         <Form.Item
           validateStatus={error ? "error" : ""}
           help={error ? error.message : null}
-          label={label}
+          label={label || null}
         >
           <Input
             {...field}
             type={type}
             size="large"
             maxLength={max}
-            required={required}
-            defaultChecked={defaultValue || null}
             placeholder={placeholder}
           />
         </Form.Item>

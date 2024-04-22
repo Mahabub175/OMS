@@ -1,4 +1,5 @@
 import { toast } from "sonner";
+import { useState } from "react";
 import dayjs from "dayjs";
 import CustomDrawer from "../../../components/Shared/Drawer/CustomDrawer";
 import CustomForm from "../../../components/Shared/Form/CustomForm";
@@ -13,8 +14,9 @@ import { useAddBookMutation } from "../../../redux/services/book/bookApi";
 
 const CreateBook = ({ open, setOpen }) => {
   const [addBook, { isLoading }] = useAddBookMutation();
+  const [filePreview, setFilePreview] = useState(null);
 
-  const onSubmit = async (data) => {
+  const onSubmit = async (data, methods) => {
     const submittedData = {
       title: data.title,
       publication_date: dayjs(data?.publication_date).format("YYYY-MM-DD"),
@@ -35,6 +37,8 @@ const CreateBook = ({ open, setOpen }) => {
       if (res.data.success) {
         toast.success(res.data.message);
         setOpen(false);
+        methods.reset();
+        setFilePreview(null);
       } else {
         toast.error(res.data.message);
       }
@@ -71,7 +75,12 @@ const CreateBook = ({ open, setOpen }) => {
           placeholder={"Enter ISBN"}
         />
 
-        <FileUploader label={"Book Cover"} name={"image"} />
+        <FileUploader
+          label={"Book Cover"}
+          name={"image"}
+          filePreview={filePreview}
+          setFilePreview={setFilePreview}
+        />
         <div className="flex justify-end items-center gap-4 mt-20">
           <Button
             onClick={() => setOpen(false)}
