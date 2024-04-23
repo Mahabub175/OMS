@@ -39,7 +39,9 @@ const EditBook = ({ open, setOpen, itemId }) => {
         isbn: data?.isbn || bookData?.data?.isbn,
         ...(data?.image !== undefined && { image }),
         status:
-          data?.status !== undefined ? data?.status : bookData?.data?.status,
+          data?.status === "Inactive"
+            ? false
+            : data?.status || bookData?.data?.status,
       };
 
       const updatedBookData = new FormData();

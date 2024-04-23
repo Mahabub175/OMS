@@ -8,10 +8,16 @@ const CustomDatePicker = ({
   required,
   defaultValue,
 }) => {
+  const fallbackLabel = "This Field";
   return (
     <Controller
       name={name}
       defaultValue={defaultValue || null}
+      rules={{
+        required: required
+          ? `${label || fallbackLabel} is required.`
+          : undefined,
+      }}
       render={({ field, fieldState: { error } }) => (
         <Form.Item
           validateStatus={error ? "error" : ""}

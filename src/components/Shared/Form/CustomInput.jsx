@@ -30,6 +30,7 @@ const CustomInput = ({
           <Input
             {...field}
             type={type}
+            required={required}
             size="large"
             maxLength={max}
             placeholder={placeholder}

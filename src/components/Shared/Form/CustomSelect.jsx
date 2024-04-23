@@ -39,14 +39,7 @@ const CustomSelect = ({
             placeholder={placeholder || null}
             allowClear
             size="large"
-            options={
-              options || [
-                { value: "jack", label: "Jack" },
-                { value: "lucy", label: "Lucy" },
-                { value: "Yiminghe", label: "yiminghe" },
-                { value: "disabled", label: "Disabled" },
-              ]
-            }
+            options={options}
           />
         </Form.Item>
       )}
