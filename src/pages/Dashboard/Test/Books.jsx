@@ -139,7 +139,7 @@ const Books = () => {
         columns={columns}
         pagination={false}
         dataSource={tableData}
-        className="mt-10"
+        className="mt-10 overflow-auto"
         loading={isLoading}
       />
       <Pagination
