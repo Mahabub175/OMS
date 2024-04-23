@@ -24,5 +24,7 @@ export const theme = {
       colorPrimaryHover: "#FF8100",
     },
   },
-  token: {},
+  token: {
+    colorPrimary: "#FF8100",
+  },
 };
