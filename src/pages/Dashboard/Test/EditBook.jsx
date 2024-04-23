@@ -39,7 +39,11 @@ const EditBook = ({ open, setOpen, itemId }) => {
         isbn: data?.isbn || bookData?.data?.isbn,
         ...(data?.image !== undefined && { image }),
         status:
-          data?.status !== undefined || null
+          data?.status === "Inactive"
+            ? false
+            : data?.status === "Active"
+            ? true
+            : data?.status !== undefined || null
             ? data?.status
             : bookData?.data?.status,
       };

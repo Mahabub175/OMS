@@ -28,7 +28,11 @@ const EditPhone = ({ open, setOpen, itemId }) => {
         relation: data?.relation || phoneData?.data?.relation,
         phone_number: data?.phone_number || phoneData?.data?.phone_number,
         status:
-          data?.status !== undefined || null
+          data?.status === "Inactive"
+            ? false
+            : data?.status === "Active"
+            ? true
+            : data?.status !== undefined || null
             ? data?.status
             : phoneData?.data?.status,
       };
