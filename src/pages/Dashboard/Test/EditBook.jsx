@@ -63,7 +63,6 @@ const EditBook = ({ open, setOpen, itemId }) => {
       if (res.data.success) {
         toast.success(res.data.message);
         setOpen(false);
-        window.location.reload();
       } else {
         toast.error(res.data.message);
       }

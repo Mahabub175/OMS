@@ -48,7 +48,7 @@ const Books = () => {
     </CustomForm>
   );
 
-  const { data: books, isLoading } = useGetBooksQuery({
+  const { data: books, isFetching } = useGetBooksQuery({
     page: currentPage,
     search: search,
   });
@@ -175,7 +175,7 @@ const Books = () => {
         pagination={false}
         dataSource={tableData}
         className="mt-10 overflow-auto"
-        loading={isLoading}
+        loading={isFetching}
       />
       <Pagination
         className="flex justify-center mt-10 pb-28"
