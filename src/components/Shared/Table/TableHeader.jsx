@@ -5,22 +5,8 @@ import { base_url } from "../../../utilities/configs/base_api";
 import { useSelector } from "react-redux";
 import { useCurrentToken } from "../../../redux/services/auth/authSlice";
 import { FaSearch } from "react-icons/fa";
-import CustomInput from "../Form/CustomInput";
-import CustomForm from "../Form/CustomForm";
 
-const TableHeader = ({ setOpen, title, model, appLabel }) => {
-  const content = (
-    <div>
-      <CustomForm>
-        <CustomInput
-          label={"Test Search"}
-          name={"test"}
-          placeholder={"Search Here"}
-        />
-      </CustomForm>
-    </div>
-  );
-
+const TableHeader = ({ setOpen, title, model, appLabel, content }) => {
   const token = useSelector(useCurrentToken);
 
   const handleExport = async (file) => {

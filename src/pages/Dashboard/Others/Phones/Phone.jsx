@@ -12,6 +12,9 @@ import CreatePhone from "./CreatePhone";
 import DetailsModal from "../../../../components/Shared/Modal/DetailsModal";
 import DeleteModal from "../../../../components/Shared/Modal/DeleteModal";
 import EditPhone from "./EditPhone";
+import CustomForm from "../../../../components/Shared/Form/CustomForm";
+import CustomInput from "../../../../components/Shared/Form/CustomInput";
+import { SubmitButton } from "../../../../components/Shared/Button/CustomButton";
 
 const Phone = () => {
   const [open, setOpen] = useState(false);
@@ -20,9 +23,45 @@ const Phone = () => {
   const [deleteModalOpen, setDeleteModalOpen] = useState(false);
   const [itemId, setItemId] = useState(null);
   const [currentPage, setCurrentPage] = useState(1);
+  const [search, setSearch] = useState(null);
+
+  const onSubmit = async (data) => {
+    setSearch(data);
+  };
+
+  const content = (
+    <CustomForm onSubmit={onSubmit}>
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
+        <CustomInput
+          label={"Name"}
+          name={"name"}
+          placeholder={"Search by name"}
+        />
+        <CustomInput
+          label={"Relation"}
+          name={"relation"}
+          placeholder={"Search by relation"}
+        />
+        <CustomInput
+          label={"Phone Number"}
+          name={"phone_number"}
+          placeholder={"Search by phone number"}
+        />
+        <CustomInput
+          label={"Role Name"}
+          name={"role__name"}
+          placeholder={"Search by role name"}
+        />
+      </div>
+      <div></div>
+
+      <SubmitButton text={"Search"} />
+    </CustomForm>
+  );
 
   const { data: phones, isLoading } = useGetPhonesQuery({
     page: currentPage,
+    search: search,
   });
 
   const { data: phoneData } = useGetSinglePhoneQuery(itemId, { skip: !itemId });
@@ -124,6 +163,7 @@ const Phone = () => {
         title={"Phones"}
         model={"Phone"}
         appLabel={"phonebook"}
+        content={content}
       />
 
       <Table

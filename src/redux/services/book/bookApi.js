@@ -14,10 +14,20 @@ const bookApi = baseApi.injectEndpoints({
       invalidatesTags: ["books"],
     }),
     getBooks: build.query({
-      query: ({ page }) => ({
-        url: `/books/?limit=10&offset=${(page - 1) * 10}`,
-        method: "GET",
-      }),
+      query: ({ page, search }) => {
+        let searchParams = "";
+        if (search) {
+          Object.keys(search).forEach((key) => {
+            if (search[key]) {
+              searchParams += `&${key}=${search[key]}`;
+            }
+          });
+        }
+        return {
+          url: `/books/?limit=10&offset=${(page - 1) * 10}${searchParams}`,
+          method: "GET",
+        };
+      },
       transformResponse: (response) => {
         const resData = jwtDecode(response.data.results.token);
         return { meta: response.data.meta, data: resData.data };

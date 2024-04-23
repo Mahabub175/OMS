@@ -12,6 +12,9 @@ import {
 import DeleteModal from "../../../components/Shared/Modal/DeleteModal";
 import DetailsModal from "../../../components/Shared/Modal/DetailsModal";
 import EditBook from "./EditBook";
+import CustomForm from "../../../components/Shared/Form/CustomForm";
+import CustomInput from "../../../components/Shared/Form/CustomInput";
+import { SubmitButton } from "../../../components/Shared/Button/CustomButton";
 
 const Books = () => {
   const [open, setOpen] = useState(false);
@@ -20,9 +23,34 @@ const Books = () => {
   const [deleteModalOpen, setDeleteModalOpen] = useState(false);
   const [itemId, setItemId] = useState(null);
   const [currentPage, setCurrentPage] = useState(1);
+  const [search, setSearch] = useState(null);
+
+  const onSubmit = async (data) => {
+    setSearch(data);
+  };
+
+  const content = (
+    <CustomForm onSubmit={onSubmit}>
+      <div className="flex gap-4">
+        <CustomInput
+          label={"Title"}
+          name={"title"}
+          placeholder={"Search by title"}
+        />
+        <CustomInput
+          label={"ISBN"}
+          name={"isbn"}
+          placeholder={"Search by isbn"}
+        />
+      </div>
+
+      <SubmitButton text={"Search"} />
+    </CustomForm>
+  );
 
   const { data: books, isLoading } = useGetBooksQuery({
     page: currentPage,
+    search: search,
   });
 
   const { data: bookData } = useGetSingleBookQuery(itemId, { skip: !itemId });
@@ -138,6 +166,8 @@ const Books = () => {
         title={"Books"}
         model={"Book"}
         appLabel={"books"}
+        onSubmit={onSubmit}
+        content={content}
       />
 
       <Table

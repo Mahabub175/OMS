@@ -14,13 +14,23 @@ const phoneApi = baseApi.injectEndpoints({
       invalidatesTags: ["phones"],
     }),
     getPhones: build.query({
-      query: ({ page }) => ({
-        url: `/phones/?limit=10&offset=${(page - 1) * 10}`,
-        method: "GET",
-      }),
+      query: ({ page, search }) => {
+        let searchParams = "";
+        if (search) {
+          Object.keys(search).forEach((key) => {
+            if (search[key]) {
+              searchParams += `&${key}=${search[key]}`;
+            }
+          });
+        }
+        return {
+          url: `/phones/?limit=10&offset=${(page - 1) * 10}${searchParams}`,
+          method: "GET",
+        };
+      },
       transformResponse: (response) => {
         const resData = jwtDecode(response.data.results.token);
-        return { response: response.data.meta, data: resData.data };
+        return { meta: response.data.meta, data: resData.data };
       },
       providesTags: ["phones"],
     }),
