@@ -25,15 +25,14 @@ const EditPhone = ({ open, setOpen, itemId }) => {
     try {
       const submittedData = {
         name: data?.name || phoneData?.data?.name,
-
         relation: data?.relation || phoneData?.data?.relation,
         phone_number: data?.phone_number || phoneData?.data?.phone_number,
         status:
-          data?.status === "Inactive"
-            ? false
-            : data?.status || phoneData?.data?.status,
+          data?.status !== undefined || null
+            ? data?.status
+            : phoneData?.data?.status,
       };
-
+      console.log(data?.status);
       const updatedBookData = new FormData();
       Object.entries(submittedData).forEach(([key, value]) => {
         updatedBookData.append(key, value);
@@ -105,6 +104,19 @@ const EditPhone = ({ open, setOpen, itemId }) => {
           placeholder={"Select a role"}
           required={false}
           options={roleOptions}
+        />
+
+        <CustomSelect
+          label={"Status"}
+          name={"status"}
+          placeholder={"Select a status"}
+          defaultValue={defaultValue?.status}
+          required={false}
+          type={"status"}
+          options={[
+            { value: true, label: "Active" },
+            { value: false, label: "Inactive" },
+          ]}
         />
 
         <div className="bottom-buttons">
