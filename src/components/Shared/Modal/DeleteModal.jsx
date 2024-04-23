@@ -1,13 +1,11 @@
 import { Button, Modal } from "antd";
 import { SubmitButton } from "../Button/CustomButton";
-import { useDeleteBookMutation } from "../../../redux/services/book/bookApi";
 import { toast } from "sonner";
 
-const DeleteModal = ({ modalOpen, setModalOpen, itemId }) => {
-  const [deleteBook] = useDeleteBookMutation();
+const DeleteModal = ({ modalOpen, setModalOpen, itemId, func }) => {
   const handleDelete = async () => {
     try {
-      const res = await deleteBook(itemId);
+      const res = await func(itemId);
       if (res.data.success) {
         setModalOpen(false);
         toast.success(res.data.message);
@@ -16,9 +14,9 @@ const DeleteModal = ({ modalOpen, setModalOpen, itemId }) => {
         toast.error(res.data.message);
       }
     } catch (error) {
-      console.error("Error deleting book:", error);
+      console.error("Error deleting item:", error);
       setModalOpen(false);
-      toast.error("An error occurred while deleting the book.");
+      toast.error("An error occurred while deleting the item.");
     }
   };
   return (

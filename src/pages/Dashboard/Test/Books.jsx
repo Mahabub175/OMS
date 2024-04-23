@@ -5,6 +5,7 @@ import { MdDelete } from "react-icons/md";
 import { FaEdit, FaEye } from "react-icons/fa";
 import CreateBook from "./CreateBook";
 import {
+  useDeleteBookMutation,
   useGetBooksQuery,
   useGetSingleBookQuery,
 } from "../../../redux/services/book/bookApi";
@@ -29,6 +30,8 @@ const Books = () => {
   const handlePageChange = (page) => {
     setCurrentPage(page);
   };
+
+  const [deleteBook] = useDeleteBookMutation();
 
   const columns = [
     {
@@ -160,6 +163,7 @@ const Books = () => {
         itemId={itemId}
         modalOpen={deleteModalOpen}
         setModalOpen={setDeleteModalOpen}
+        func={deleteBook}
       />
     </div>
   );

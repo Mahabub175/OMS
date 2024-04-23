@@ -26,7 +26,9 @@ const DetailsModal = ({ modalOpen, setModalOpen, title, details }) => {
           ([key, value]) =>
             !excludedKeys.includes(key) && (
               <div key={key} className="mt-4 flex items-center gap-4">
-                <h3 className="text-lg font-bold capitalize">{key}:</h3>
+                <h3 className="text-lg font-bold capitalize">
+                  {key.replace(/_/g, " ")}:
+                </h3>
                 {key === "status" ? (
                   <p>{value ? "Active" : "Inactive"}</p>
                 ) : typeof value === "string" && value.startsWith("http") ? (

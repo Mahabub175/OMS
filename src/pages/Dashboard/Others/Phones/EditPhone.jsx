@@ -1,87 +1,109 @@
-import { Button } from "antd";
 import { toast } from "sonner";
-import { SubmitButton } from "../../../../components/Shared/Button/CustomButton";
+import {
+  useGetSinglePhoneQuery,
+  useUpdatePhoneMutation,
+} from "../../../../redux/services/phone/phoneApi";
 import CustomDrawer from "../../../../components/Shared/Drawer/CustomDrawer";
 import CustomForm from "../../../../components/Shared/Form/CustomForm";
 import CustomInput from "../../../../components/Shared/Form/CustomInput";
 import CustomSelect from "../../../../components/Shared/Form/CustomSelect";
-import { useAddPhoneMutation } from "../../../../redux/services/phone/phoneApi";
+import { Button } from "antd";
+import { SubmitButton } from "../../../../components/Shared/Button/CustomButton";
 import { useGetAllRolesQuery } from "../../../../redux/services/role/roleApi";
 
-const CreatePhone = ({ open, setOpen }) => {
+const EditPhone = ({ open, setOpen, itemId }) => {
   const { data: roleData } = useGetAllRolesQuery({ skip: !open });
-  const [addPhone, { isLoading }] = useAddPhoneMutation();
+  const { data: phoneData } = useGetSinglePhoneQuery(itemId, { skip: !itemId });
+  const [updatePhone, { isLoading }] = useUpdatePhoneMutation();
 
   const roleOptions = roleData?.data?.map((item) => ({
     value: item?.id,
     label: item?.name.toUpperCase(),
   }));
 
-  const onSubmit = async (data, methods) => {
-    const toastId = toast.loading("Creating Phone...");
-    const submittedData = {
-      name: data.name,
-      relation: data.relation,
-      phone_number: data.phone_number,
-      role: data.role,
-      is_deleted: false,
-      status: true,
-    };
-
-    const phoneData = new FormData();
-
-    Object.entries(submittedData).forEach(([key, value]) => {
-      phoneData.append(key, value);
-    });
-
+  const onSubmit = async (data) => {
     try {
-      const res = await addPhone(phoneData);
+      const submittedData = {
+        name: data?.name || phoneData?.data?.name,
+
+        relation: data?.relation || phoneData?.data?.relation,
+        phone_number: data?.phone_number || phoneData?.data?.phone_number,
+        status:
+          data?.status === "Inactive"
+            ? false
+            : data?.status || phoneData?.data?.status,
+      };
+
+      const updatedBookData = new FormData();
+      Object.entries(submittedData).forEach(([key, value]) => {
+        updatedBookData.append(key, value);
+      });
+
+      const updatedData = {
+        id: itemId,
+        data: updatedBookData,
+      };
+
+      const res = await updatePhone(updatedData);
+
       if (res.data.success) {
-        toast.success(res.data.message, { id: toastId, duration: 2000 });
+        toast.success(res.data.message);
         setOpen(false);
-        methods.reset();
       } else {
-        toast.error(res.data.message, { id: toastId, duration: 2000 });
+        toast.error(res.data.message);
       }
     } catch (error) {
-      console.error("Error creating phone:", error);
-      toast.error("An error occurred while creating the phone.", {
-        id: toastId,
-        duration: 2000,
-      });
+      console.error("Error updating phone:", error);
+      toast.error("An error occurred while updating the phone.");
     }
   };
+
+  const defaultValue = phoneData?.data;
+
+  if (!defaultValue) {
+    return null;
+  }
+
   return (
-    <CustomDrawer open={open} setOpen={setOpen} title="Create Phone">
+    <CustomDrawer
+      open={open}
+      setOpen={setOpen}
+      title="Edit Phone"
+      placement={"left"}
+    >
       <CustomForm onSubmit={onSubmit}>
         <div className="three-grid">
           <CustomInput
             label={"Name"}
             name={"name"}
             type={"text"}
-            required={true}
+            required={false}
+            defaultValue={defaultValue?.name}
             placeholder={"Enter Name"}
           />
           <CustomInput
             label={"Relation"}
             name={"relation"}
             type={"text"}
-            required={true}
+            required={false}
+            defaultValue={defaultValue?.relation}
             placeholder={"Enter Relation"}
           />
           <CustomInput
             label={"Phone Number"}
             name={"phone_number"}
             type={"number"}
-            required={true}
+            defaultValue={defaultValue?.phone_number}
+            required={false}
             placeholder={"Enter Phone Number"}
           />
         </div>
         <CustomSelect
           label={"Role"}
           name={"role"}
+          defaultValue={defaultValue?.role_name}
           placeholder={"Select a role"}
-          required={true}
+          required={false}
           options={roleOptions}
         />
 
@@ -100,4 +122,4 @@ const CreatePhone = ({ open, setOpen }) => {
   );
 };
 
-export default CreatePhone;
+export default EditPhone;
