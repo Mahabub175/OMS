@@ -143,7 +143,7 @@ const Books = () => {
         loading={isLoading}
       />
       <Pagination
-        className="flex justify-center mt-10"
+        className="flex justify-center mt-10 pb-28"
         total={books?.meta?.count}
         current={currentPage}
         onChange={handlePageChange}
