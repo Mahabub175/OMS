@@ -119,7 +119,12 @@ const Phone = () => {
 
   return (
     <div className="px-5">
-      <TableHeader setOpen={setOpen} title={"Phones"} />
+      <TableHeader
+        setOpen={setOpen}
+        title={"Phones"}
+        model={"Phone"}
+        appLabel={"phonebook"}
+      />
 
       <Table
         columns={columns}
