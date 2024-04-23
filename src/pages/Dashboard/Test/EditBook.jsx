@@ -13,9 +13,12 @@ import CustomDatePicker from "../../../components/Shared/Form/CustomDatePicker";
 import FileUploader from "../../../components/Shared/Form/FileUploader";
 import { Button } from "antd";
 import { SubmitButton } from "../../../components/Shared/Button/CustomButton";
+import { useState } from "react";
+import CustomSelect from "../../../components/Shared/Form/CustomSelect";
 
 const EditBook = ({ open, setOpen, itemId }) => {
   const { data: bookData } = useGetSingleBookQuery(itemId, { skip: !itemId });
+  const [filePreview, setFilePreview] = useState(null);
 
   const [updateBook, { isLoading }] = useUpdateBookMutation();
 
@@ -29,13 +32,14 @@ const EditBook = ({ open, setOpen, itemId }) => {
           : bookData?.data?.image;
 
       const submittedData = {
-        title: data.title || bookData?.data?.title,
+        title: data?.title || bookData?.data?.title,
         publication_date: data?.publication_date
-          ? dayjs(data.publication_date).format("YYYY-MM-DD")
+          ? dayjs(data?.publication_date).format("YYYY-MM-DD")
           : bookData?.data?.publication_date,
-        isbn: data.isbn || bookData?.data?.isbn,
-        ...(data.image !== undefined && { image }),
-        status: true,
+        isbn: data?.isbn || bookData?.data?.isbn,
+        ...(data?.image !== undefined && { image }),
+        status:
+          data?.status !== undefined ? data?.status : bookData?.data?.status,
       };
 
       const updatedBookData = new FormData();
@@ -64,6 +68,10 @@ const EditBook = ({ open, setOpen, itemId }) => {
 
   const defaultValue = bookData?.data;
 
+  if (!defaultValue) {
+    return null;
+  }
+
   return (
     <CustomDrawer
       open={open}
@@ -87,8 +95,7 @@ const EditBook = ({ open, setOpen, itemId }) => {
           label={"Publication Date"}
           name={"publication_date"}
           type={"date"}
-          // defaultValue={dayjs(defaultValue?.publication_date, "YYYY-MM-DD")}
-          defaultValue={""}
+          defaultValue={dayjs(defaultValue?.publication_date, "YYYY-MM-DD")}
           required={false}
           placeholder={"Enter Publication Date"}
         />
@@ -101,10 +108,25 @@ const EditBook = ({ open, setOpen, itemId }) => {
           placeholder={"Enter ISBN"}
         />
 
+        <CustomSelect
+          label={"Status"}
+          name={"status"}
+          placeholder={"Select a status"}
+          defaultValue={defaultValue?.status}
+          required={false}
+          type={"status"}
+          options={[
+            { value: true, label: "Active" },
+            { value: false, label: "Inactive" },
+          ]}
+        />
+
         <FileUploader
           label={"Book Cover"}
           name={"image"}
           defaultValue={defaultValue?.image}
+          filePreview={filePreview}
+          setFilePreview={setFilePreview}
         />
         <div className="flex justify-end items-center gap-4 mt-20">
           <Button

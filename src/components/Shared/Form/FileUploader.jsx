@@ -71,7 +71,7 @@ const FileUploader = ({
                       <img
                         src={filePreview}
                         alt="File Preview"
-                        className="mx-auto h-auto"
+                        className="mx-auto w-auto h-[70vh]"
                       />
                     ) : (
                       <div className="flex items-center gap-2 justify-center">

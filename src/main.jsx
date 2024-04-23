@@ -9,30 +9,7 @@ import { PersistGate } from "redux-persist/integration/react";
 import { Toaster } from "sonner";
 import { router } from "./routes/routes.jsx";
 import { ConfigProvider } from "antd";
-
-const theme = {
-  components: {
-    Table: {
-      cellPaddingBlock: 8,
-    },
-    DatePicker: {
-      activeBorderColor: "#FF8100",
-      hoverBorderColor: "#FF8100",
-    },
-    Input: {
-      activeBorderColor: "#FF8100",
-      hoverBorderColor: "#FF8100",
-    },
-    Select: {
-      colorPrimary: "#FF8100",
-      colorPrimaryHover: "#FF8100",
-    },
-    Pagination: {
-      itemActiveBg: "#FF8100",
-    },
-  },
-  token: {},
-};
+import { theme } from "./utilities/configs/antDesignConfigs.js";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>

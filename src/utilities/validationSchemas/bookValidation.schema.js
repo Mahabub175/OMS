@@ -16,5 +16,6 @@ export const updateBookValidationSchema = z.object({
     .string()
     .max(13, { message: "ISBN must be 13 characters or less" })
     .optional(),
+  status: z.boolean().optional(),
   image: z.any().optional(),
 });

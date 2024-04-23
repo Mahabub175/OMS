@@ -11,7 +11,6 @@ const LoanDrawerForm = () => {
           label={"Giver Name"}
           placeholder={"Select Giver Name"}
           name={"giver_name"}
-          mode={"single"}
           required={true}
         />
         <CustomInput

@@ -1,5 +1,5 @@
 import { Form, Input } from "antd";
-import { Controller, useFormContext } from "react-hook-form";
+import { Controller } from "react-hook-form";
 
 const CustomInput = ({
   type,
@@ -10,14 +10,11 @@ const CustomInput = ({
   defaultValue,
   max,
 }) => {
-  const { control } = useFormContext();
-
   const fallbackLabel = "This Field";
 
   return (
     <Controller
       name={name}
-      control={control}
       defaultValue={defaultValue || ""}
       rules={{
         required: required

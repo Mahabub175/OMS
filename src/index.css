@@ -33,3 +33,6 @@
 .three-grid {
   @apply grid grid-cols-1 lg:grid-cols-3 gap-4;
 }
+.bottom-buttons {
+  @apply flex justify-end items-center gap-4 absolute bottom-10 right-10;
+}

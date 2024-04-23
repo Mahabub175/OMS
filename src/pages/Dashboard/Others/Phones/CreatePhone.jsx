@@ -77,7 +77,7 @@ const CreatePhone = ({ open, setOpen }) => {
           required={true}
         />
 
-        <div className="flex justify-end items-center gap-4 mt-20">
+        <div className="bottom-buttons">
           <Button
             onClick={() => setOpen(false)}
             type="text"

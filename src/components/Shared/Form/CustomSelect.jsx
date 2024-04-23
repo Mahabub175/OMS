@@ -1,4 +1,4 @@
-import { Controller, useFormContext } from "react-hook-form";
+import { Controller } from "react-hook-form";
 import { Form, Select } from "antd";
 
 const CustomSelect = ({
@@ -8,46 +8,49 @@ const CustomSelect = ({
   mode,
   defaultValue,
   required,
+  options,
+  type,
 }) => {
-  const { control } = useFormContext();
+  const fallbackLabel = "This Field";
+  let adjustedDefaultValue = defaultValue;
 
-  const fallbackLabel = "Select";
+  if (type === "status" && defaultValue !== undefined) {
+    adjustedDefaultValue = defaultValue ? "Active" : "Inactive";
+  }
 
   return (
-    <>
-      <Controller
-        name={name || "test"}
-        control={control}
-        defaultValue={defaultValue || null}
-        rules={{
-          required: required
-            ? `${label || fallbackLabel} is required.`
-            : undefined,
-        }}
-        render={({ field, fieldState: { error } }) => (
-          <Form.Item
-            validateStatus={error ? "error" : ""}
-            help={error ? error.message : null}
-            label={label || fallbackLabel}
-          >
-            <Select
-              {...field}
-              mode={mode || undefined}
-              placeholder={placeholder || null}
-              allowClear
-              defaultValue={defaultValue || null}
-              size="large"
-              options={[
+    <Controller
+      name={name || "test"}
+      defaultValue={adjustedDefaultValue || null}
+      rules={{
+        required: required
+          ? `${label || fallbackLabel} is required.`
+          : undefined,
+      }}
+      render={({ field, fieldState: { error } }) => (
+        <Form.Item
+          validateStatus={error ? "error" : ""}
+          help={error ? error.message : null}
+          label={label || fallbackLabel}
+        >
+          <Select
+            {...field}
+            mode={mode || undefined}
+            placeholder={placeholder || null}
+            allowClear
+            size="large"
+            options={
+              options || [
                 { value: "jack", label: "Jack" },
                 { value: "lucy", label: "Lucy" },
                 { value: "Yiminghe", label: "yiminghe" },
                 { value: "disabled", label: "Disabled" },
-              ]}
-            />
-          </Form.Item>
-        )}
-      />
-    </>
+              ]
+            }
+          />
+        </Form.Item>
+      )}
+    />
   );
 };
 
